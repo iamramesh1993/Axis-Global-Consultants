@@ -46,3 +46,8 @@ next-env.d.ts
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# agent skill artifacts / local editor config
+.agents/
+skills-lock.json
+.claude/

@@ -72,6 +72,15 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      // Apex is canonical. Without this, www serves the whole site too and
+      // Google sees two copies of every page.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.axisglobalpk.com" }],
+        destination: "https://axisglobalpk.com/:path*",
+        permanent: true,
+      },
+
       // Friendly shortcuts people type or that appear in ad copy.
       { source: "/study", destination: "/#destinations", permanent: false },
       { source: "/uk", destination: "/study/uk", permanent: true },
