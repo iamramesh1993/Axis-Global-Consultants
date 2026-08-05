@@ -8,7 +8,7 @@ export const site = {
   shortName: "Axis Global",
   tagline: "Overseas education, without the guesswork.",
   description:
-    "Axis Global Consultants helps Pakistani students win admission to universities in the UK, Canada and Australia — with a published process, honest fit assessments and no commission-chasing.",
+    "Axis Global Consultants helps Pakistani students win admission to universities in the UK, Canada, Australia and Uzbekistan — with a published process, honest fit assessments and no commission-chasing.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://axisglobalpk.com",
   locale: "en_PK",
 
@@ -34,14 +34,27 @@ export const site = {
 
 export const whatsappLink = `https://wa.me/${site.contact.whatsapp.replace(/\D/g, "")}`;
 
-/** Primary nav — used by header and footer. */
+/**
+ * Primary nav. Country labels are short here so seven items still fit the
+ * desktop bar; the mobile drawer and footer use the fuller "Study in X" wording
+ * where there is room for it.
+ */
 export const mainNav = [
-  { href: "/study/uk", label: "Study in UK" },
-  { href: "/study/canada", label: "Study in Canada" },
-  { href: "/study/australia", label: "Study in Australia" },
-  { href: "/how-it-works", label: "How it works" },
-  { href: "/guides", label: "Guides" },
-  { href: "/about", label: "About" },
+  { href: "/study/uk", label: "UK", longLabel: "Study in the UK" },
+  { href: "/study/canada", label: "Canada", longLabel: "Study in Canada" },
+  {
+    href: "/study/australia",
+    label: "Australia",
+    longLabel: "Study in Australia",
+  },
+  {
+    href: "/study/uzbekistan",
+    label: "Uzbekistan",
+    longLabel: "Study in Uzbekistan",
+  },
+  { href: "/how-it-works", label: "How it works", longLabel: "How it works" },
+  { href: "/guides", label: "Guides", longLabel: "Guides" },
+  { href: "/about", label: "About", longLabel: "About us" },
 ] as const;
 
 /** The seven published stages. Referenced by the home stepper and /how-it-works. */

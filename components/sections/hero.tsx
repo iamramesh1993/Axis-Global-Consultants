@@ -42,10 +42,10 @@ export function Hero() {
 
           <Reveal delay={0.12}>
             <p className="text-lead text-fg-muted mt-7 max-w-lg">
-              We help Pakistani students get into universities in the UK, Canada
-              and Australia. Our whole process is published up front — including
-              the parts other consultants would rather you didn&apos;t ask
-              about.
+              We help Pakistani students get into universities in the UK,
+              Canada, Australia and Uzbekistan. Our whole process is published
+              up front — including the parts other consultants would rather you
+              didn&apos;t ask about.
             </p>
           </Reveal>
 

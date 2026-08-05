@@ -17,6 +17,7 @@ const columns = [
       { href: "/study/uk", label: "Study in the UK" },
       { href: "/study/canada", label: "Study in Canada" },
       { href: "/study/australia", label: "Study in Australia" },
+      { href: "/study/uzbekistan", label: "Study in Uzbekistan" },
     ],
   },
   {

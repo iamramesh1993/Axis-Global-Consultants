@@ -105,7 +105,7 @@ export function SiteHeader() {
               href={item.href}
               className="border-line font-display text-fg border-b py-3.5 text-lg tracking-tight last:border-b-0"
             >
-              {item.label}
+              {item.longLabel}
             </Link>
           ))}
           <ButtonLink href="/contact" size="lg" className="mt-5 w-full">

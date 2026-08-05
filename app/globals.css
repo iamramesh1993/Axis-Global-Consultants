@@ -136,6 +136,46 @@
     font-feature-settings: "cv11", "ss01";
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    /* Nothing should ever scroll sideways on a phone. */
+    overflow-x: hidden;
+    /* Clear the iOS home bar so the sticky CTA never sits under it. */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Leave room for the mobile sticky CTA so it can't cover the footer's
+     last links or the form's submit button. */
+  @media (max-width: 1023px) {
+    footer {
+      padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+    }
+  }
+
+  /* Android Chrome and iOS Safari both zoom on focus if an input is under 16px. */
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1rem);
+  }
+
+  @media (min-width: 768px) {
+    input,
+    select,
+    textarea {
+      font-size: 0.9375rem;
+    }
+  }
+
+  /* Native select options inherit the page colours poorly on some Androids. */
+  select option {
+    background-color: var(--ink-raised);
+    color: var(--fg);
+  }
+
+  img,
+  svg,
+  video {
+    max-width: 100%;
+    height: auto;
   }
 
   h1,
