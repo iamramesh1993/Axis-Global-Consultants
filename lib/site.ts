@@ -14,8 +14,8 @@ export const site = {
 
   contact: {
     email: "hello@axisglobalpk.com",
-    phone: "+92 300 000 0000", // PLACEHOLDER — replace with the real line
-    whatsapp: "+923000000000", // PLACEHOLDER — digits only, used to build wa.me links
+    phone: "+92 313 5155868",
+    whatsapp: "+923135155868", // same line as above; wa.me links strip the non-digits
     address: {
       line1: "Office address to be confirmed", // PLACEHOLDER
       city: "Karachi",
