@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { site } from "@/lib/site";
+import { robotsMeta } from "@/lib/seo";
 import "./globals.css";
 
 /**
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     title: `${site.name} — Study in the UK, Canada & Australia`,
     description: site.description,
   },
-  robots: { index: true, follow: true },
+  robots: robotsMeta,
 };
 
 export const viewport: Viewport = {
