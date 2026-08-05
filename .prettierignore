@@ -1,0 +1,7 @@
+.next
+node_modules
+pnpm-lock.yaml
+public
+
+# Keep the original brief untouched
+axis-global-claude-code-prompt.md
