@@ -1,6 +1,7 @@
 import { and, desc, eq, ilike, or, sql, type SQL } from "drizzle-orm";
 import { getDb } from "@/lib/db";
 import { leads, type Lead } from "@/db/schema";
+import { INTAKES, TARGET_COUNTRIES } from "@/lib/validation";
 
 export type LeadFilters = {
   country?: string;
@@ -20,11 +21,27 @@ export type LeadsResult = {
   configured: boolean;
 };
 
+/**
+ * Filter options come from the canonical lists the form can produce, unioned
+ * with whatever is actually in the table.
+ *
+ * Deriving them from the data alone looked reasonable and was wrong twice over:
+ * a fresh deployment showed empty dropdowns, and a shared filter URL silently
+ * reset its control when no lead currently matched — so the URL said "UK" while
+ * the select said "All destinations" and the rows were filtered anyway. The
+ * union also keeps any legacy value that is no longer offered by the form.
+ */
+function optionsFor(canonical: readonly string[], found: string[]): string[] {
+  const seen = new Set<string>(canonical);
+  const extras = found.filter((value) => value && !seen.has(value)).sort();
+  return [...canonical, ...extras];
+}
+
 const EMPTY: LeadsResult = {
   rows: [],
   total: 0,
-  countries: [],
-  intakes: [],
+  countries: [...TARGET_COUNTRIES],
+  intakes: [...INTAKES],
   configured: false,
 };
 
@@ -85,8 +102,14 @@ export async function getLeads(
   return {
     rows,
     total: totalRows[0]?.count ?? 0,
-    countries: countryRows.map((r) => r.value).filter(Boolean),
-    intakes: intakeRows.map((r) => r.value).filter(Boolean),
+    countries: optionsFor(
+      TARGET_COUNTRIES,
+      countryRows.map((r) => r.value),
+    ),
+    intakes: optionsFor(
+      INTAKES,
+      intakeRows.map((r) => r.value),
+    ),
     configured: true,
   };
 }

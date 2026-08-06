@@ -90,13 +90,34 @@ export function verifySessionToken(token: string | undefined): boolean {
   return true;
 }
 
-export const sessionCookieOptions = {
-  httpOnly: true,
-  sameSite: "strict" as const,
-  secure: process.env.NODE_ENV === "production",
-  path: "/",
-  maxAge: SESSION_MAX_AGE_SECONDS,
-};
+/**
+ * Cookie options, with `secure` derived from the actual request scheme rather
+ * than from NODE_ENV.
+ *
+ * NODE_ENV is "production" for any `next start`, including a local one served
+ * over http — and a browser silently discards a Secure cookie on an http origin.
+ * That made sign-in look broken with no error anywhere: the redirect fired, the
+ * cookie was dropped, and /admin/leads bounced straight back to the login page.
+ *
+ * Reading the scheme means production over TLS still gets Secure, and a local
+ * http build is testable, without a test-only escape hatch that could be left
+ * switched on by accident.
+ */
+export function sessionCookieOptions(request: Request) {
+  const forwardedProto = request.headers.get("x-forwarded-proto");
+  const scheme = forwardedProto
+    ? // A proxy may send a comma-separated list; the client-facing hop is first.
+      (forwardedProto.split(",")[0]?.trim() ?? "")
+    : new URL(request.url).protocol.replace(":", "");
+
+  return {
+    httpOnly: true,
+    sameSite: "strict" as const,
+    secure: scheme === "https",
+    path: "/",
+    maxAge: SESSION_MAX_AGE_SECONDS,
+  };
+}
 
 /** True when the current request carries a valid admin session. */
 export async function isAdminAuthenticated(): Promise<boolean> {

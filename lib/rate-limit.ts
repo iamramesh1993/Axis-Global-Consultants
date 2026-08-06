@@ -10,8 +10,18 @@
 type Entry = { count: number; resetAt: number };
 
 const WINDOW_MS = 10 * 60 * 1000; // 10 minutes
-const MAX_REQUESTS = 5;
+const DEFAULT_MAX_REQUESTS = 5;
 const MAX_TRACKED_IPS = 10_000;
+
+/**
+ * Sign-in gets a looser limit than the lead form.
+ *
+ * Five was too tight for the person who owns the password: two mistypes and
+ * they are locked out for ten minutes, which is a bad trade when the thing being
+ * protected is their own dashboard. Ten still makes guessing hopeless — an
+ * attacker needs millions of attempts — while leaving room for human error.
+ */
+export const SIGN_IN_MAX_ATTEMPTS = 10;
 
 const hits = new Map<string, Entry>();
 
@@ -23,7 +33,10 @@ function sweep(now: number) {
   if (hits.size > MAX_TRACKED_IPS) hits.clear();
 }
 
-export function checkRateLimit(ip: string): {
+export function checkRateLimit(
+  ip: string,
+  maxRequests: number = DEFAULT_MAX_REQUESTS,
+): {
   ok: boolean;
   remaining: number;
   retryAfterSeconds: number;
@@ -35,12 +48,12 @@ export function checkRateLimit(ip: string): {
 
   if (!existing || existing.resetAt <= now) {
     hits.set(ip, { count: 1, resetAt: now + WINDOW_MS });
-    return { ok: true, remaining: MAX_REQUESTS - 1, retryAfterSeconds: 0 };
+    return { ok: true, remaining: maxRequests - 1, retryAfterSeconds: 0 };
   }
 
   existing.count += 1;
 
-  if (existing.count > MAX_REQUESTS) {
+  if (existing.count > maxRequests) {
     return {
       ok: false,
       remaining: 0,
@@ -50,7 +63,7 @@ export function checkRateLimit(ip: string): {
 
   return {
     ok: true,
-    remaining: MAX_REQUESTS - existing.count,
+    remaining: maxRequests - existing.count,
     retryAfterSeconds: 0,
   };
 }

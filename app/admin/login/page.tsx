@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { Lock, ShieldAlert } from "lucide-react";
 import { Logo } from "@/components/site/logo";
 import { Button } from "@/components/ui/button";
+import { PasswordField } from "@/components/forms/password-field";
 import { getAdminConfig, isAdminAuthenticated } from "@/lib/admin-auth";
 
 export const metadata = {
@@ -92,21 +93,7 @@ export default async function AdminLoginPage({
             method="POST"
             className="mt-6 flex flex-col gap-4"
           >
-            <div className="flex flex-col gap-2">
-              <label htmlFor="password" className="text-sm font-semibold">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                autoComplete="current-password"
-                autoFocus
-                disabled={!config.ok}
-                className="rounded-control border-line-strong bg-card text-ink focus:border-brand focus:ring-brand-light h-12 w-full border px-4 text-base transition-[border-color,box-shadow] duration-200 outline-none focus:ring-4 disabled:opacity-50 md:text-[0.9375rem]"
-              />
-            </div>
+            <PasswordField disabled={!config.ok} autoFocus />
 
             <Button type="submit" size="lg" disabled={!config.ok}>
               Sign in
