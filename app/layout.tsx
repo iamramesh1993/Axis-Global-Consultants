@@ -1,8 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import { SiteHeader } from "@/components/site/site-header";
-import { SiteFooter } from "@/components/site/site-footer";
-import { MobileCta } from "@/components/site/mobile-cta";
 import { Analytics } from "@/components/analytics/analytics";
 import { site } from "@/lib/site";
 import { robotsMeta } from "@/lib/seo";
@@ -95,10 +92,13 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <SiteHeader />
-        <main id="main">{children}</main>
-        <SiteFooter />
-        <MobileCta />
+        {/*
+          No header, footer or sticky CTA here. Each route group supplies its own
+          chrome — app/(marketing) the public site's, app/admin a bare <main> —
+          because a nested layout cannot remove a parent's, and the admin
+          dashboard was rendering the marketing header above its own bar.
+        */}
+        {children}
         <Analytics />
       </body>
     </html>

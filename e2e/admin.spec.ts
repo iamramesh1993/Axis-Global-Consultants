@@ -113,6 +113,44 @@ test.describe("admin sign-in", () => {
   });
 });
 
+test.describe("admin chrome", () => {
+  /**
+   * Admin pages had the marketing header stacked above the admin bar: two
+   * headers, a public nav and a "Book a free assessment" CTA on a staff-only
+   * page. The chrome now lives in the (marketing) route group, since a nested
+   * layout cannot remove a parent's.
+   */
+  for (const path of ["/admin/login", "/admin/leads"]) {
+    test(`${path} carries no marketing chrome`, async ({ page }) => {
+      await page.goto(path);
+
+      await expect(page.locator("header")).toHaveCount(0);
+      await expect(page.locator('nav[aria-label="Main"]')).toHaveCount(0);
+      await expect(page.locator("footer")).toHaveCount(0);
+      await expect(page.locator(".mobile-cta")).toHaveCount(0);
+      // Exactly one main landmark, so the skip link still has a target.
+      await expect(page.locator("#main")).toHaveCount(1);
+    });
+  }
+
+  test("the public site keeps its chrome", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator("header")).toHaveCount(1);
+    await expect(page.locator('nav[aria-label="Main"]')).toHaveCount(1);
+    await expect(page.locator("footer")).toHaveCount(1);
+    await expect(page.locator("#main")).toHaveCount(1);
+  });
+
+  test("the 404 keeps its chrome", async ({ page }) => {
+    // It renders in the root layout, outside the marketing group, so it has to
+    // bring the header and footer itself.
+    await page.goto("/no-such-page-anywhere");
+    await expect(page.locator("header")).toHaveCount(1);
+    await expect(page.locator("footer")).toHaveCount(1);
+    await expect(page.locator("#main")).toHaveCount(1);
+  });
+});
+
 test.describe("admin dashboard", () => {
   test("renders its controls and an honest empty state", async ({ page }) => {
     await signIn(page);
