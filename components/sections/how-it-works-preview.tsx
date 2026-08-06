@@ -27,11 +27,10 @@ export function HowItWorksPreview() {
             </span>
             <p className="text-ink-muted max-w-xl text-[0.9375rem] leading-relaxed">
               <span className="text-ink font-semibold">
-                Live status tracking is coming to your student portal.
+                You will always know which stage your file is in.
               </span>{" "}
-              Until it ships, you get the same detail the old-fashioned way — a
-              named advisor who tells you where your file is without being
-              chased.
+              A named advisor tells you where it stands and what happens next,
+              without you having to chase them for an answer.
             </p>
           </div>
           <ButtonLink

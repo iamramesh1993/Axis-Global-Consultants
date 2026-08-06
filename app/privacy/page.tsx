@@ -26,7 +26,7 @@ const sections = [
     body: [
       "When you submit the assessment form we collect your name, email address, phone number, highest qualification, target destination, intended intake, and optionally your budget range and any message you write.",
       "We also record how you arrived at the site — campaign parameters in the URL such as utm_source, or the referring domain — so we can tell which advertising is worth continuing.",
-      "If analytics is enabled, Google Analytics 4 and the Meta Pixel may set cookies and collect standard usage data. Neither runs unless the corresponding configuration is present, and neither receives your form submission.",
+      "We may use Google Analytics 4 and the Meta Pixel to see how people find and use the site — which pages get read, and which adverts bring students here. These set cookies. They never receive anything you type into the assessment form, and you can block or clear them in your browser at any time.",
     ],
   },
   {
@@ -84,18 +84,7 @@ export default function PrivacyPage() {
 
       <Section className="pt-0 md:pt-0">
         <div className="max-w-3xl">
-          <div className="rounded-card border-line-strong bg-card border px-5 py-4">
-            <p className="text-ink-muted text-sm leading-relaxed">
-              <span className="text-ink font-medium">
-                Placeholder — pending legal review.
-              </span>{" "}
-              This describes our actual data practices accurately, but it has
-              not been reviewed by a lawyer and is not a substitute for advice
-              on Pakistani data protection obligations.
-            </p>
-          </div>
-
-          <div className="mt-12 space-y-12">
+          <div className="space-y-12">
             {sections.map((section) => (
               <section key={section.heading}>
                 <h2 className="text-[1.5rem] leading-tight font-semibold tracking-[-0.02em]">

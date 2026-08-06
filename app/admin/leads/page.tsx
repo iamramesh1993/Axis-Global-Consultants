@@ -85,7 +85,7 @@ export default async function AdminLeadsPage({
       <div className="border-line bg-card border-b">
         <div className="container-page flex h-18 items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <Logo showTagline={false} />
+            <Logo height={38} />
             <span className="bg-brand-tint text-brand hidden rounded-full px-3 py-1 text-xs font-semibold sm:inline">
               Leads
             </span>

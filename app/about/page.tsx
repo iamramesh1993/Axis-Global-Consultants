@@ -1,4 +1,3 @@
-import { Quote } from "lucide-react";
 import { PageHero } from "@/components/sections/page-hero";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
@@ -44,31 +43,6 @@ const promises = [
   {
     title: "You pay third parties directly",
     body: "Visa fees, deposits and test fees go straight from you to the authority or institution. Nothing passes through us, so no margin can be hidden in it.",
-  },
-];
-
-/**
- * Placeholder testimonials — replace with real, attributable quotes before
- * launch. Kept obviously marked so they cannot be mistaken for real ones.
- */
-const testimonials = [
-  {
-    quote:
-      "They told me my first choice was a waste of the application fee and explained exactly why. Nobody else had been straight with me like that.",
-    name: "Placeholder — replace before launch",
-    detail: "MSc, UK",
-  },
-  {
-    quote:
-      "Sab kuch pehle se bata diya tha — fees, timeline, risk. Koi surprise nahi tha.",
-    name: "Placeholder — replace before launch",
-    detail: "Undergraduate, Canada",
-  },
-  {
-    quote:
-      "I was about to enrol somewhere that would not have counted back home. They caught it before I paid the deposit.",
-    name: "Placeholder — replace before launch",
-    detail: "MBBS enquiry",
   },
 ];
 
@@ -141,35 +115,6 @@ export default function AboutPage() {
                   {promise.body}
                 </p>
               </div>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
-      <Section tone="panel">
-        <SectionHeader
-          eyebrow="Students"
-          title="What students say"
-          lead="These are placeholder quotes while we collect real, attributable ones. We are not going to invent testimonials on a page about honesty."
-        />
-
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {testimonials.map((testimonial, i) => (
-            <Reveal key={testimonial.quote} delay={i * 0.06}>
-              <figure className="rounded-card border-line-strong bg-page h-full border border-dashed p-6">
-                <Quote className="text-brand/50 h-5 w-5" aria-hidden="true" />
-                <blockquote className="text-ink-muted mt-4 text-sm leading-relaxed">
-                  {testimonial.quote}
-                </blockquote>
-                <figcaption className="border-line mt-5 border-t pt-4 text-xs">
-                  <span className="text-ink-subtle block italic">
-                    {testimonial.name}
-                  </span>
-                  <span className="text-ink-subtle mt-1 block">
-                    {testimonial.detail}
-                  </span>
-                </figcaption>
-              </figure>
             </Reveal>
           ))}
         </div>

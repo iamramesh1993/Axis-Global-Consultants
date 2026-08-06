@@ -12,8 +12,7 @@ export const metadata = {
 const ERRORS: Record<string, string> = {
   invalid: "That password is not right. Try again.",
   throttled: "Too many attempts. Wait a few minutes and try again.",
-  unconfigured:
-    "Admin access is not configured yet. ADMIN_PASSWORD and ADMIN_SESSION_SECRET need to be set.",
+  unconfigured: "Sign-in is unavailable right now. Contact the site owner.",
   expired: "Your session expired. Please sign in again.",
 };
 
@@ -32,7 +31,7 @@ export default async function AdminLoginPage({
     <div className="bg-panel flex min-h-[80vh] items-center justify-center px-6 py-16">
       <div className="w-full max-w-sm">
         <div className="flex justify-center">
-          <Logo showTagline={false} />
+          <Logo height={38} />
         </div>
 
         <div className="rounded-card-lg border-line bg-card mt-8 border p-7 shadow-[var(--shadow-card)]">
@@ -58,18 +57,12 @@ export default async function AdminLoginPage({
                 aria-hidden="true"
               />
               <div className="text-ink-muted text-sm leading-relaxed">
-                <p className="text-ink font-semibold">Not configured yet.</p>
+                <p className="text-ink font-semibold">
+                  Sign-in is unavailable.
+                </p>
                 <p className="mt-1">
-                  Set{" "}
-                  {config.missing.map((key, i) => (
-                    <span key={key}>
-                      {i > 0 && " and "}
-                      <code className="bg-panel text-brand rounded px-1.5 py-0.5 font-mono text-[0.8em] font-semibold">
-                        {key}
-                      </code>
-                    </span>
-                  ))}{" "}
-                  in the Vercel project, then redeploy.
+                  This dashboard has not been set up yet. Contact the site
+                  owner.
                 </p>
               </div>
             </div>
@@ -120,10 +113,6 @@ export default async function AdminLoginPage({
             </Button>
           </form>
         </div>
-
-        <p className="text-ink-subtle mt-6 text-center text-xs leading-relaxed">
-          This page is excluded from search engines and from the sitemap.
-        </p>
       </div>
     </div>
   );

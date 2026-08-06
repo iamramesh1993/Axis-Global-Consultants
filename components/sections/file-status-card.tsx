@@ -106,9 +106,8 @@ export function FileStatusCard() {
       {/* Card footer */}
       <div className="border-line bg-panel border-t px-6 py-4">
         <p className="text-ink-subtle text-xs leading-relaxed">
-          Illustrative example. The live status view arrives with the student
-          portal in the next release — until then you get the same detail by
-          email and WhatsApp.
+          An illustration of how we report progress. You get this same detail on
+          your own file by WhatsApp and email, whenever you ask.
         </p>
       </div>
     </div>

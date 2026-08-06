@@ -29,11 +29,19 @@ export const site = {
     email: "hello@axisglobalpk.com",
     phone: "+92 313 5155868",
     whatsapp: "+923135155868", // same line as above; wa.me links strip the non-digits
+    /**
+     * `street` is intentionally empty until there is a real address to publish.
+     * Every consumer treats it as optional and falls back to city + country, so
+     * the site reads as finished rather than showing a "to be confirmed" note to
+     * students. Fill it in and the street line appears everywhere automatically.
+     */
     address: {
-      line1: "Office address to be confirmed", // PLACEHOLDER
+      street: "",
       city: "Karachi",
       country: "Pakistan",
     },
+    /** Shown wherever an address would be, so the absence never looks like a gap. */
+    meetingNote: "Meetings by appointment, in person or on video",
     hours: "Mon–Sat, 10:00–19:00 PKT",
   },
 

@@ -12,7 +12,9 @@ const INK_MUTED = "#475569";
 const LINE = "#e2e8f0";
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
+  const url = new URL(request.url);
+  const { searchParams } = url;
+  const origin = url.origin;
 
   // Clamp lengths so a long title can't blow the layout apart.
   const title = (searchParams.get("title") ?? site.name).slice(0, 110);
@@ -44,56 +46,17 @@ export async function GET(request: Request) {
         }}
       />
 
-      {/* Brand row */}
-      <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-        <div
-          style={{
-            width: 60,
-            height: 60,
-            borderRadius: 15,
-            background: BRAND,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <svg width="42" height="42" viewBox="0 0 48 48">
-            <path
-              d="M24 10.5 35.5 38h-5.2l-2.3-5.9h-8l-2.3 5.9H12.5L24 10.5Zm0 10.4-2.6 6.7h5.2L24 20.9Z"
-              fill="#ffffff"
-            />
-            <path
-              d="M9.5 36.5c7.5.6 15.5-3.2 21-8.6 2.5-2.4 4.4-5 5.8-7.4"
-              stroke="#ffffff"
-              strokeWidth="2.6"
-              strokeLinecap="round"
-              fill="none"
-            />
-            <path
-              d="M35.2 15.6 39.6 14l-1.3 4.3-2.4 1.1-1.4-1.3.7-2.5Z"
-              fill="#ffffff"
-            />
-          </svg>
-        </div>
-        {/* satori needs an explicit display on any element with >1 child */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-          <div
-            style={{ display: "flex", gap: 9, fontSize: 30, fontWeight: 800 }}
-          >
-            <span style={{ color: INK }}>Axis</span>
-            <span style={{ color: BRAND }}>Global</span>
-          </div>
-          <div
-            style={{
-              fontSize: 15,
-              letterSpacing: "0.16em",
-              color: INK_MUTED,
-              fontWeight: 600,
-            }}
-          >
-            YOUR GLOBAL EDUCATION PARTNER
-          </div>
-        </div>
+      {/* Brand row — the supplied lockup, fetched from this origin. satori has no
+          filesystem on the edge runtime, and using the request origin keeps
+          preview deployments working as well as production. */}
+      <div style={{ display: "flex", alignItems: "center" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`${origin}/brand/logo-lockup.png`}
+          alt="Axis Global Consultants"
+          height={62}
+          width={227}
+        />
       </div>
 
       {/* Title block */}

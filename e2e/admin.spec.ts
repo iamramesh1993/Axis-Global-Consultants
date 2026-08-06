@@ -16,11 +16,13 @@ test.describe("admin access control", () => {
     );
   });
 
-  test("login page states it is unconfigured and disables the form", async ({
+  test("login page refuses generically and disables the form", async ({
     page,
   }) => {
     await page.goto("/admin/login");
-    await expect(page.getByText(/not configured yet/i)).toBeVisible();
+    // Generic on purpose: this page is public, so it must not disclose which
+    // environment variables are missing.
+    await expect(page.getByText(/sign-in is unavailable/i)).toBeVisible();
     await expect(page.getByLabel("Password")).toBeDisabled();
     await expect(page.getByRole("button", { name: /sign in/i })).toBeDisabled();
   });

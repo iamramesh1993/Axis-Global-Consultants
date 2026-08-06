@@ -79,7 +79,7 @@ export function SiteHeader() {
       )}
     >
       <div className="container-page flex h-18 items-center justify-between gap-6">
-        <Logo showTagline={false} />
+        <Logo height={40} />
 
         <nav aria-label="Main" className="hidden items-center gap-0.5 lg:flex">
           {mainNav.map((item) => {

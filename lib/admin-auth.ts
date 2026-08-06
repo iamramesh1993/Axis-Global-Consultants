@@ -30,7 +30,12 @@ export function getAdminConfig(): Configured | NotConfigured {
   if (!password) missing.push("ADMIN_PASSWORD");
   if (!secret) missing.push("ADMIN_SESSION_SECRET");
 
-  if (missing.length > 0) return { ok: false, missing };
+  if (missing.length > 0) {
+    // Logged, not rendered: the login page is public, so naming the missing
+    // variables there would tell a stranger how the deployment is configured.
+    console.warn(`[admin] not configured — missing: ${missing.join(", ")}`);
+    return { ok: false, missing };
+  }
   return { ok: true, password: password!, secret: secret! };
 }
 

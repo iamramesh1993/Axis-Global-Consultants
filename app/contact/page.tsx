@@ -116,10 +116,16 @@ export default function ContactPage() {
                       aria-hidden="true"
                     />
                     <span>
-                      {site.contact.address.line1}
-                      <br />
+                      {site.contact.address.street && (
+                        <>
+                          {site.contact.address.street}
+                          <br />
+                        </>
+                      )}
                       {site.contact.address.city},{" "}
                       {site.contact.address.country}
+                      <br />
+                      {site.contact.meetingNote}
                     </span>
                   </p>
                   <p className="text-ink-muted flex gap-3">

@@ -89,17 +89,7 @@ export default function TermsPage() {
 
       <Section className="pt-0 md:pt-0">
         <div className="max-w-3xl">
-          <div className="rounded-card border-line-strong bg-card border px-5 py-4">
-            <p className="text-ink-muted text-sm leading-relaxed">
-              <span className="text-ink font-medium">
-                Placeholder — pending legal review.
-              </span>{" "}
-              These terms reflect how we actually operate, but they have not
-              been drafted or reviewed by a lawyer.
-            </p>
-          </div>
-
-          <div className="mt-12 space-y-12">
+          <div className="space-y-12">
             {sections.map((section) => (
               <section key={section.heading}>
                 <h2 className="text-[1.5rem] leading-tight font-semibold tracking-[-0.02em]">

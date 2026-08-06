@@ -25,7 +25,8 @@ export const NON_PAGE_ROUTES = [
   "/sitemap.xml",
   "/llms.txt",
   "/manifest.webmanifest",
-  "/icon.svg",
+  "/icon-192.png",
+  "/apple-icon.png",
 ] as const;
 
 /** Redirects declared in next.config.ts. */

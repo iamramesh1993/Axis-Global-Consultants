@@ -128,7 +128,7 @@ export default async function CountryPage({
         <SectionHeader
           eyebrow="Rejection risk"
           title="What commonly goes wrong"
-          lead="No other consultancy in Pakistan puts this section on the page. It is the most useful thing here."
+          lead="The part most consultants leave out. Worth reading before you pay anyone a deposit."
         />
         <div className="mt-10 max-w-3xl">
           <RiskList risks={fm.risks} />

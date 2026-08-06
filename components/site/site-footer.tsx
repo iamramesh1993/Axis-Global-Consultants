@@ -52,7 +52,7 @@ export function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-[1.3fr_2fr] lg:gap-16">
           {/* Brand + contact */}
           <div className="max-w-sm">
-            <Logo />
+            <Logo height={48} />
 
             <p className="text-ink-muted mt-6 text-[0.9375rem] leading-relaxed">
               Overseas education advisory for Pakistani students. Published
@@ -92,11 +92,17 @@ export function SiteFooter() {
             </div>
 
             <p className="text-ink-subtle mt-6 text-sm leading-relaxed">
-              {site.contact.address.line1}
-              <br />
+              {site.contact.address.street && (
+                <>
+                  {site.contact.address.street}
+                  <br />
+                </>
+              )}
               {site.contact.address.city}, {site.contact.address.country}
               <br />
               {site.contact.hours}
+              <br />
+              {site.contact.meetingNote}
             </p>
           </div>
 
