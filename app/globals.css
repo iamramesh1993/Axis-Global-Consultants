@@ -266,6 +266,12 @@
     }
   }
 
+  /* While the mobile nav drawer is open, the sticky bottom CTA would sit
+     behind it and duplicate the drawer's own button. */
+  [data-nav-open="true"] .mobile-cta {
+    display: none;
+  }
+
   /* Underline flourish used on the hero's accent word */
   .brand-underline {
     position: relative;

@@ -88,7 +88,7 @@ export function Hero() {
         </div>
 
         {/* The visual: a mock of the file-status view students actually get */}
-        <Reveal delay={0.15} y={24} className="relative lg:pl-4">
+        <Reveal delay={0.15} y={24} className="relative lg:pl-4 xl:mt-14">
           <FileStatusCard />
         </Reveal>
       </div>

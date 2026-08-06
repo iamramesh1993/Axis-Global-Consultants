@@ -69,6 +69,77 @@ test.describe("mobile layout", () => {
     ).toBeHidden();
   });
 
+  test("open drawer hides the sticky CTA instead of stacking two", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    // Scroll far enough that the sticky bar is showing.
+    await page.evaluate(() => window.scrollTo(0, 900));
+    await page.waitForTimeout(500);
+
+    const stickyBar = page.locator(".mobile-cta");
+    await expect(stickyBar).toBeVisible();
+
+    await page.getByRole("button", { name: /open menu/i }).click();
+    await page.waitForTimeout(300);
+
+    // Otherwise the user sees "Book a free assessment" twice, once behind the
+    // drawer — which is exactly what it looked like on a real phone.
+    await expect(stickyBar).toBeHidden();
+
+    await page.getByRole("button", { name: /close menu/i }).click();
+    await page.waitForTimeout(400);
+    await expect(stickyBar).toBeVisible();
+  });
+
+  test("drawer scrolls rather than running off the screen", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: /open menu/i }).click();
+
+    const drawer = page.locator("#mobile-nav");
+    await expect(drawer).toBeVisible();
+
+    const box = await drawer.boundingBox();
+    const viewport = page.viewportSize()!;
+    // The drawer must never extend past the bottom of the viewport.
+    expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height + 1);
+
+    // And its own content must be reachable by scrolling inside it.
+    const scrollable = await drawer.evaluate(
+      (el) => el.scrollHeight > el.clientHeight,
+    );
+    expect(scrollable).toBe(true);
+  });
+
+  test("drawer ends with contact, socials and legal links", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: /open menu/i }).click();
+
+    const drawer = page.locator("#mobile-nav");
+
+    await expect(
+      drawer.getByRole("link", { name: /whatsapp \+92/i }),
+    ).toBeVisible();
+    await expect(
+      drawer.getByRole("link", { name: /^call us$/i }),
+    ).toBeVisible();
+    await expect(
+      drawer.getByRole("link", { name: /hello@axisglobalpk\.com/i }),
+    ).toBeVisible();
+
+    for (const label of ["Instagram", "TikTok", "Facebook", "LinkedIn"]) {
+      await expect(drawer.getByRole("link", { name: label })).toBeVisible();
+    }
+
+    for (const label of ["FAQs", "Privacy", "Terms"]) {
+      await expect(drawer.getByRole("link", { name: label })).toBeVisible();
+    }
+  });
   test("sticky CTA appears after scrolling and is tappable", async ({
     page,
   }) => {

@@ -79,7 +79,7 @@ export function Card({
       className={cn(
         "rounded-card border-line bg-card border p-7 shadow-[var(--shadow-soft)]",
         interactive &&
-          "hover:border-line-strong transition-[border-color,transform,box-shadow] duration-200 [transition-timing-function:var(--ease-out-soft)] hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]",
+          "hover:border-brand transition-[border-color,transform,box-shadow] duration-200 [transition-timing-function:var(--ease-out-soft)] hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]",
         className,
       )}
     >

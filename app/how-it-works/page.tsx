@@ -292,7 +292,7 @@ export default function HowItWorksPage() {
         </Reveal>
       </Section>
 
-      <Section tone="panel">
+      <Section id="faqs" tone="panel">
         <SectionHeader
           eyebrow="Questions"
           title="The ones people actually ask"

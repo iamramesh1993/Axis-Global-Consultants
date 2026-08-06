@@ -31,7 +31,7 @@ export function GuidesPreview() {
           <Reveal key={guide.slug} delay={i * 0.08}>
             <Link
               href={`/guides/${guide.slug}`}
-              className="group rounded-card border-line bg-card hover:border-line-strong flex h-full flex-col border p-7 shadow-[var(--shadow-soft)] transition-[border-color,transform,box-shadow] duration-200 [transition-timing-function:var(--ease-out-soft)] hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
+              className="group rounded-card border-line bg-card hover:border-brand flex h-full flex-col border p-7 shadow-[var(--shadow-soft)] transition-[border-color,transform,box-shadow] duration-200 [transition-timing-function:var(--ease-out-soft)] hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
             >
               <div className="flex flex-wrap items-center gap-2">
                 {guide.frontmatter.tags.slice(0, 2).map((tag) => (

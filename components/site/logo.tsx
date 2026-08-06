@@ -60,12 +60,20 @@ export function Logo({
     >
       <LogoMark />
       {showWordmark && (
+        /*
+         * The full legal name, stacked. On one line "Axis Global Consultants"
+         * runs ~200px, which collides with the seven-item desktop nav at the lg
+         * breakpoint; two lines keep it inside the 72px header at every width.
+         */
         <span className="flex flex-col leading-none">
           <span className="text-[1.0625rem] leading-none font-extrabold tracking-[-0.025em]">
             Axis <span className="text-brand">Global</span>
           </span>
+          <span className="text-ink mt-1 text-[0.625rem] leading-none font-bold tracking-[0.14em] uppercase">
+            Consultants
+          </span>
           {showTagline && (
-            <span className="text-ink-subtle mt-1 hidden text-[0.5625rem] leading-none font-medium tracking-[0.1em] uppercase sm:block">
+            <span className="text-ink-subtle mt-1.5 text-[0.5625rem] leading-none font-medium tracking-[0.1em] uppercase">
               Your Global Education Partner
             </span>
           )}

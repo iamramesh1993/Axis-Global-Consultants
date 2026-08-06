@@ -17,6 +17,9 @@ export const PAGE_ROUTES = [
   "/terms",
 ] as const;
 
+/** Staff-only, deliberately excluded from the public page sweeps. */
+export const ADMIN_ROUTES = ["/admin/login", "/admin/leads"] as const;
+
 export const NON_PAGE_ROUTES = [
   "/robots.txt",
   "/sitemap.xml",

@@ -138,7 +138,7 @@ export function SiteFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="rounded-control border-line text-brand hover:border-brand hover:bg-brand-tint grid h-10 w-10 place-items-center border transition-colors"
+                className="rounded-control border-line text-brand hover:border-brand hover:bg-brand hover:text-on-brand grid h-10 w-10 place-items-center border transition-colors duration-200"
               >
                 <Icon
                   className="h-[1.125rem] w-[1.125rem]"
