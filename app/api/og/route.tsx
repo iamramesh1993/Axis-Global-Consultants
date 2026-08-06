@@ -1,15 +1,19 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
+import { BRAND_HEX } from "@/lib/brand";
 
 export const runtime = "edge";
 
-const PAGE = "#ffffff";
-const PANEL = "#f8fafc";
-const BRAND = "#2563eb";
-const BRAND_TINT = "#eff6ff";
-const INK = "#0f172a";
-const INK_MUTED = "#475569";
-const LINE = "#e2e8f0";
+// satori has no CSSOM, so these have to be literals — imported from one place.
+const {
+  page: PAGE,
+  panel: PANEL,
+  brand: BRAND,
+  brandTint: BRAND_TINT,
+  ink: INK,
+  inkMuted: INK_MUTED,
+  line: LINE,
+} = BRAND_HEX;
 
 export async function GET(request: Request) {
   const url = new URL(request.url);

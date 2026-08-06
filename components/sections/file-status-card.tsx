@@ -12,7 +12,7 @@ const CURRENT_STAGE = 4; // "Applied"
 
 export function FileStatusCard() {
   return (
-    <div className="rounded-card-lg border-line bg-card border shadow-[var(--shadow-card)]">
+    <div className="rounded-card border-line bg-card border shadow-[var(--shadow-soft)]">
       {/* Card header */}
       <div className="border-line flex items-start justify-between gap-4 border-b px-6 py-5">
         <div>

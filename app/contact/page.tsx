@@ -39,7 +39,7 @@ export default function ContactPage() {
           {/* Form first in the DOM: it is the point of the page, and on mobile
               it should be what you land on rather than the address block. */}
           <Reveal>
-            <div className="rounded-card-lg border-line-strong bg-card border p-6 shadow-[var(--shadow-card)] md:p-8">
+            <div className="rounded-card border-line bg-card border p-6 shadow-[var(--shadow-soft)] md:p-8">
               <LeadForm />
             </div>
           </Reveal>

@@ -159,6 +159,39 @@ test.describe("mobile layout", () => {
     expect(box!.height).toBeGreaterThanOrEqual(44);
   });
 
+  test("sticky CTA stands down over the assessment form", async ({ page }) => {
+    await page.goto("/");
+
+    const stickyBar = page.locator(".mobile-cta");
+    const submit = page.getByRole("button", {
+      name: /book my free assessment/i,
+    });
+
+    // Mid-page: the bar should be up.
+    await page.evaluate(() => window.scrollTo(0, 900));
+    await page.waitForTimeout(500);
+    await expect(stickyBar).toBeVisible();
+
+    // At the form: it must get out of the way of the submit button.
+    // The bar slides off with translate-y-full rather than display:none, so
+    // assert its position — toBeHidden() does not treat a transform as hidden.
+    await submit.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(700);
+
+    const viewportHeight = page.viewportSize()!.height;
+    const barBox = await stickyBar.boundingBox();
+    expect(barBox).not.toBeNull();
+    expect(
+      barBox!.y,
+      "sticky bar is still overlapping the viewport",
+    ).toBeGreaterThanOrEqual(viewportHeight - 1);
+
+    // And the submit button must be genuinely reachable, not under the bar.
+    const box = await submit.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box!.y + box!.height).toBeLessThanOrEqual(viewportHeight);
+  });
+
   test("sticky CTA is suppressed on the contact page", async ({ page }) => {
     await page.goto("/contact");
     await page.evaluate(() => window.scrollTo(0, 1400));

@@ -51,7 +51,7 @@ export function LeadCta({
         </Reveal>
 
         <Reveal delay={0.1} y={20}>
-          <div className="rounded-card-lg border-line bg-card border p-7 shadow-[var(--shadow-card)] md:p-9">
+          <div className="rounded-card border-line bg-card border p-7 shadow-[var(--shadow-soft)] md:p-9">
             <LeadForm defaultCountry={defaultCountry} />
           </div>
         </Reveal>

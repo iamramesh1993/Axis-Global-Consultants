@@ -20,17 +20,50 @@ import { cn } from "@/lib/utils";
  * drawer and the user sees two identical "Book a free assessment" buttons.
  */
 export function MobileCta() {
-  const [visible, setVisible] = useState(false);
+  const [scrolledEnough, setScrolledEnough] = useState(false);
+  const [formInView, setFormInView] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 600);
+    const onScroll = () => setScrolledEnough(window.scrollY > 600);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /**
+   * Stand down once the assessment form reaches the bottom of the screen.
+   *
+   * The bar is fixed over the last ~72px of the viewport, which is exactly where
+   * the form's submit button sits while someone is filling it in. Sending a
+   * student to /contact from a bar covering the button they were about to press
+   * is the worst possible moment to interrupt.
+   *
+   * The negative top rootMargin shrinks the observation area to the bottom 40%
+   * of the viewport — the band the bar actually occupies — so the CTA stays up
+   * while the form is merely somewhere below.
+   */
+  useEffect(() => {
+    const form = document.getElementById("assessment");
+    if (!form) {
+      setFormInView(false);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) setFormInView(entry.isIntersecting);
+      },
+      { rootMargin: "-60% 0px 0px 0px" },
+    );
+
+    observer.observe(form);
+    return () => observer.disconnect();
+  }, [pathname]);
+
   if (pathname === "/contact") return null;
+
+  const visible = scrolledEnough && !formInView;
 
   return (
     <div

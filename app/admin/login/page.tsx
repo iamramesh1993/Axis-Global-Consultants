@@ -34,7 +34,7 @@ export default async function AdminLoginPage({
           <Logo height={38} />
         </div>
 
-        <div className="rounded-card-lg border-line bg-card mt-8 border p-7 shadow-[var(--shadow-card)]">
+        <div className="rounded-card border-line bg-card mt-8 border p-7 shadow-[var(--shadow-soft)]">
           <div className="flex items-center gap-3">
             <span
               aria-hidden="true"
