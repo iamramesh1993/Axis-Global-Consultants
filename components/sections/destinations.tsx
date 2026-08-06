@@ -89,8 +89,18 @@ export function Destinations() {
                     {fm.hook}
                   </p>
 
+                  {/*
+                    Fixed row heights so every card's "Tuition" sits on one
+                    baseline and every "Intakes" on another. Without this the dl
+                    height varies with how many lines the intake list wraps to
+                    (Canada takes three, Uzbekistan one), the flex-grow above
+                    absorbs the difference, and the labels end up 40px apart.
+
+                    Heights are the worst case at the narrowest card width
+                    (lg, four columns): label 16px + 2px gap + N x 20px line.
+                  */}
                   <dl className="border-line mt-6 space-y-4 border-t pt-5 text-sm">
-                    <div className="flex items-start gap-3">
+                    <div className="flex min-h-[3.625rem] items-start gap-3">
                       <Wallet
                         className="text-brand mt-0.5 h-[1.125rem] w-[1.125rem] shrink-0"
                         aria-hidden="true"
@@ -102,7 +112,7 @@ export function Destinations() {
                         </dd>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3">
+                    <div className="flex min-h-[4.875rem] items-start gap-3">
                       <CalendarDays
                         className="text-brand mt-0.5 h-[1.125rem] w-[1.125rem] shrink-0"
                         aria-hidden="true"
