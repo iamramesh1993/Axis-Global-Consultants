@@ -9,7 +9,7 @@ export function Hero() {
     <section className="bg-page relative isolate overflow-hidden">
       <HeroBackdrop />
 
-      <div className="container-page relative grid items-center gap-14 pt-10 pb-16 md:pt-14 md:pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+      <div className="container-page relative grid items-center gap-12 pt-6 pb-14 md:pt-8 md:pb-18 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pt-10 lg:pb-20">
         {/* Copy */}
         <div>
           <Reveal>
@@ -88,7 +88,7 @@ export function Hero() {
         </div>
 
         {/* The visual: a mock of the file-status view students actually get */}
-        <Reveal delay={0.15} y={24} className="relative lg:pl-4 xl:mt-14">
+        <Reveal delay={0.15} y={24} className="relative lg:pl-4">
           <FileStatusCard />
         </Reveal>
       </div>
