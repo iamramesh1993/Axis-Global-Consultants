@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 type RevealProps = {
@@ -14,33 +14,75 @@ type RevealProps = {
 };
 
 /**
- * Scroll-reveal wrapper. Renders a plain element with no animation when the
- * visitor prefers reduced motion.
+ * Fade-up-on-scroll, built to fail visible.
+ *
+ * The hidden state lives in CSS behind `[data-js="on"]`, which an inline script
+ * in the document head sets before first paint. So:
+ *
+ *   - No JS, JS still downloading, or a hydration error → content is visible.
+ *     This matters: most of our traffic is Instagram/Facebook ads on Pakistani
+ *     mobile networks, and previously the whole hero sat at opacity:0 until
+ *     React hydrated.
+ *   - prefers-reduced-motion → the transition is neutralised globally in
+ *     globals.css, and we skip observing entirely.
+ *
+ * IntersectionObserver just adds a class, so this costs no animation library.
  */
 export function Reveal({
   children,
   className,
   delay = 0,
-  y = 18,
-  as = "div",
+  y = 16,
+  as: Tag = "div",
 }: RevealProps) {
-  const reduced = useReducedMotion();
-  const MotionTag = motion[as];
+  const ref = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
 
-  if (reduced) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    // Respect the user's motion preference — show immediately, never observe.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setVisible(true);
+      return;
+    }
+
+    // Already on screen at mount (above the fold): reveal without waiting.
+    const rect = node.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.92) {
+      setVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            observer.disconnect();
+          }
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.01 },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <MotionTag
-      className={cn(className)}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+    <Tag
+      ref={ref as never}
+      className={cn("reveal", visible && "reveal-in", className)}
+      style={
+        {
+          "--reveal-delay": `${delay}s`,
+          "--reveal-y": `${y}px`,
+        } as React.CSSProperties
+      }
     >
       {children}
-    </MotionTag>
+    </Tag>
   );
 }

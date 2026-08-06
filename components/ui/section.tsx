@@ -1,24 +1,30 @@
 import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/ui/reveal";
 
+/**
+ * Section shell. `tone` drives the alternating white / #F8FAFC rhythm — pages
+ * should alternate rather than stack two of the same tone, which is what makes
+ * the whitespace read as structure instead of emptiness.
+ */
 export function Section({
   children,
   className,
   id,
-  tone = "dark",
+  tone = "page",
 }: {
   children: React.ReactNode;
   className?: string;
   id?: string;
-  tone?: "dark" | "raised" | "paper";
+  tone?: "page" | "panel" | "brand";
 }) {
   return (
     <section
       id={id}
       className={cn(
-        "scroll-mt-20 py-16 md:py-24",
-        tone === "raised" && "bg-ink-raised/40",
-        tone === "paper" && "bg-paper text-paper-fg",
+        "scroll-mt-24 py-16 md:py-20",
+        tone === "page" && "bg-page",
+        tone === "panel" && "bg-panel",
+        tone === "brand" && "bg-brand text-on-brand",
         className,
       )}
     >
@@ -32,14 +38,12 @@ export function SectionHeader({
   title,
   lead,
   align = "left",
-  tone = "dark",
   className,
 }: {
   eyebrow?: string;
   title: React.ReactNode;
   lead?: React.ReactNode;
   align?: "left" | "center";
-  tone?: "dark" | "paper";
   className?: string;
 }) {
   return (
@@ -51,26 +55,12 @@ export function SectionHeader({
       )}
     >
       {eyebrow && (
-        <p
-          className={cn(
-            "text-eyebrow font-sans uppercase",
-            tone === "paper" ? "text-paper-muted" : "text-accent",
-          )}
-        >
+        <p className="text-eyebrow text-brand font-semibold uppercase">
           {eyebrow}
         </p>
       )}
       <h2 className={cn("text-heading", eyebrow && "mt-4")}>{title}</h2>
-      {lead && (
-        <p
-          className={cn(
-            "text-lead mt-5",
-            tone === "paper" ? "text-paper-muted" : "text-fg-muted",
-          )}
-        >
-          {lead}
-        </p>
-      )}
+      {lead && <p className="text-lead text-ink-muted mt-5">{lead}</p>}
     </Reveal>
   );
 }
@@ -87,9 +77,9 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-card border-line bg-ink-raised/60 border p-6",
+        "rounded-card border-line bg-card border p-7 shadow-[var(--shadow-soft)]",
         interactive &&
-          "hover:border-accent/40 hover:bg-ink-raised transition-[border-color,transform,background-color] duration-300 [transition-timing-function:var(--ease-out-soft)] hover:-translate-y-1",
+          "hover:border-line-strong transition-[border-color,transform,box-shadow] duration-200 [transition-timing-function:var(--ease-out-soft)] hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]",
         className,
       )}
     >
@@ -107,7 +97,10 @@ export function Eyebrow({
 }) {
   return (
     <p
-      className={cn("text-eyebrow text-accent font-sans uppercase", className)}
+      className={cn(
+        "text-eyebrow text-brand font-semibold uppercase",
+        className,
+      )}
     >
       {children}
     </p>

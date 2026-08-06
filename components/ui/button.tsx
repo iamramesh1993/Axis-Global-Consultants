@@ -1,28 +1,29 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-type Variant = "accent" | "outline" | "ghost" | "paper";
+type Variant = "primary" | "secondary" | "ghost" | "inverse";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium whitespace-nowrap " +
+  "inline-flex items-center justify-center gap-2 rounded-control font-semibold whitespace-nowrap " +
   "transition-[transform,background-color,border-color,color,box-shadow] duration-200 " +
-  "[transition-timing-function:var(--ease-out-soft)] active:scale-[0.98] " +
+  "[transition-timing-function:var(--ease-out-soft)] active:scale-[0.99] " +
   "disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<Variant, string> = {
-  accent:
-    "bg-accent text-on-accent hover:bg-accent-hover hover:shadow-[var(--shadow-accent)] font-semibold",
-  outline:
-    "border border-line-strong text-fg hover:border-accent/60 hover:bg-white/[0.04] hover:text-accent",
-  ghost: "text-fg-muted hover:bg-white/[0.05] hover:text-fg",
-  paper: "bg-paper-fg text-paper hover:bg-paper-fg/85 font-semibold",
+  primary:
+    "bg-brand text-on-brand hover:bg-brand-hover hover:shadow-[var(--shadow-brand)]",
+  secondary:
+    "border border-line-strong bg-card text-ink hover:border-brand hover:text-brand hover:shadow-[var(--shadow-soft)]",
+  ghost: "text-ink-muted hover:bg-panel hover:text-ink",
+  /** For use on top of a blue fill. */
+  inverse: "bg-card text-brand hover:bg-brand-tint",
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-9 px-4 text-sm",
+  sm: "h-10 px-4 text-sm",
   md: "h-11 px-5 text-[0.9375rem]",
-  lg: "h-13 px-7 text-base",
+  lg: "h-13 px-6 text-base",
 };
 
 type CommonProps = {
@@ -33,7 +34,7 @@ type CommonProps = {
 };
 
 export function Button({
-  variant = "accent",
+  variant = "primary",
   size = "md",
   className,
   ...props
@@ -48,7 +49,7 @@ export function Button({
 
 export function ButtonLink({
   href,
-  variant = "accent",
+  variant = "primary",
   size = "md",
   className,
   ...props

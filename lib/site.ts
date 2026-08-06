@@ -3,13 +3,26 @@
  * Anything that appears in more than one place lives here.
  */
 
+const DEFAULT_URL = "https://axisglobalpk.com";
+
+/**
+ * `??` is not enough here: an env var that exists but is blank is a real and
+ * common state (a Vercel variable saved empty, or `vercel env pull` writing
+ * `KEY=""`). An empty string sails past `??` and then `new URL("")` throws
+ * during `next build` with a bare "Invalid URL", which is a miserable thing to
+ * debug. Treat blank as unset.
+ */
+const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+const siteUrl =
+  configuredUrl && configuredUrl.length > 0 ? configuredUrl : DEFAULT_URL;
+
 export const site = {
   name: "Axis Global Consultants",
   shortName: "Axis Global",
   tagline: "Overseas education, without the guesswork.",
   description:
     "Axis Global Consultants helps Pakistani students win admission to universities in the UK, Canada, Australia and Uzbekistan — with a published process, honest fit assessments and no commission-chasing.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://axisglobalpk.com",
+  url: siteUrl,
   locale: "en_PK",
 
   contact: {

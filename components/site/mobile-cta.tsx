@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ArrowRight } from "lucide-react";
 import { WhatsappIcon } from "@/components/site/social-icons";
 import { whatsappLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -31,7 +32,7 @@ export function MobileCta() {
   return (
     <div
       className={cn(
-        "border-line bg-ink/90 fixed inset-x-0 bottom-0 z-40 border-t backdrop-blur-xl transition-transform duration-300 [transition-timing-function:var(--ease-out-soft)] lg:hidden",
+        "border-line bg-page/95 fixed inset-x-0 bottom-0 z-40 border-t backdrop-blur-xl transition-transform duration-300 [transition-timing-function:var(--ease-out-soft)] lg:hidden",
         "pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]",
         visible ? "translate-y-0" : "translate-y-full",
       )}
@@ -39,16 +40,17 @@ export function MobileCta() {
       <div className="container-page flex items-center gap-3">
         <Link
           href="/contact"
-          className="bg-accent text-on-accent flex h-12 flex-1 items-center justify-center rounded-full px-5 text-[0.9375rem] font-semibold active:scale-[0.98]"
+          className="rounded-control bg-brand text-on-brand flex h-12 flex-1 items-center justify-center gap-2 px-5 text-[0.9375rem] font-semibold active:scale-[0.99]"
         >
           Book a free assessment
+          <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>
         <a
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Message us on WhatsApp"
-          className="border-line-strong text-fg-muted grid h-12 w-12 shrink-0 place-items-center rounded-full border active:scale-[0.98]"
+          className="rounded-control border-line-strong text-brand grid h-12 w-12 shrink-0 place-items-center border active:scale-[0.99]"
         >
           <WhatsappIcon className="h-5 w-5" />
         </a>

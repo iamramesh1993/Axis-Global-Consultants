@@ -203,19 +203,19 @@ export function LeadForm({
             tooling and some screen readers handle the explicit pairing better. */}
         <label
           htmlFor={consentId}
-          className="text-fg-muted flex cursor-pointer items-start gap-3 text-sm"
+          className="text-ink-muted flex cursor-pointer items-start gap-3 text-sm"
         >
           <input
             id={consentId}
             type="checkbox"
-            className="border-line-strong bg-ink-raised accent-accent mt-0.5 h-5 w-5 shrink-0 cursor-pointer rounded"
+            className="border-line-strong bg-card accent-brand mt-0.5 h-5 w-5 shrink-0 cursor-pointer rounded"
             {...register("consent")}
           />
           <span>
             I agree to be contacted about my enquiry and I&apos;ve read the{" "}
             <a
               href="/privacy"
-              className="text-accent decoration-accent/30 underline underline-offset-4"
+              className="text-brand decoration-brand/30 underline underline-offset-4"
             >
               privacy policy
             </a>
@@ -232,7 +232,7 @@ export function LeadForm({
       {status === "error" && serverMessage && (
         <div
           role="alert"
-          className="border-danger/40 bg-danger/10 text-fg rounded-xl border px-4 py-3 text-sm"
+          className="border-danger/40 bg-danger/10 text-ink rounded-xl border px-4 py-3 text-sm"
         >
           {serverMessage}
         </div>
@@ -257,9 +257,9 @@ export function LeadForm({
         )}
       </Button>
 
-      <p className="text-fg-subtle flex items-start gap-2 text-xs leading-relaxed">
+      <p className="text-ink-subtle flex items-start gap-2 text-xs leading-relaxed">
         <ShieldCheck
-          className="text-accent/70 mt-0.5 h-4 w-4 shrink-0"
+          className="text-brand/70 mt-0.5 h-4 w-4 shrink-0"
           aria-hidden="true"
         />
         No obligation, no commission-chasing. We reply within one working day —
@@ -277,17 +277,17 @@ function SuccessState({ onReset }: { onReset: () => void }) {
       data-testid="lead-success"
       role="status"
       aria-live="polite"
-      className="rounded-card border-accent/30 bg-accent/[0.06] border p-7 text-center md:p-9"
+      className="rounded-card border-brand/30 bg-brand/[0.06] border p-7 text-center md:p-9"
     >
-      <div className="bg-accent/15 mx-auto grid h-14 w-14 place-items-center rounded-full">
-        <CheckCircle2 className="text-accent h-7 w-7" aria-hidden="true" />
+      <div className="bg-brand/15 mx-auto grid h-14 w-14 place-items-center rounded-full">
+        <CheckCircle2 className="text-brand h-7 w-7" aria-hidden="true" />
       </div>
 
-      <h3 className="font-display mt-6 text-2xl font-semibold tracking-tight">
+      <h3 className="mt-6 text-2xl font-bold tracking-[-0.015em]">
         Got it — we&apos;ll be in touch.
       </h3>
 
-      <p className="text-fg-muted mx-auto mt-4 max-w-md text-sm leading-relaxed">
+      <p className="text-ink-muted mx-auto mt-4 max-w-md text-sm leading-relaxed">
         A real advisor is going to read what you sent, not an autoresponder.
         Expect a WhatsApp message or a call within one working day. If your
         profile isn&apos;t a fit for what you&apos;ve asked for, we&apos;ll tell
@@ -299,14 +299,14 @@ function SuccessState({ onReset }: { onReset: () => void }) {
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="border-line-strong hover:border-accent/60 hover:text-accent inline-flex h-11 items-center justify-center rounded-full border px-5 text-sm font-medium transition-colors"
+          className="border-line-strong hover:border-brand/60 hover:text-brand inline-flex h-11 items-center justify-center rounded-full border px-5 text-sm font-medium transition-colors"
         >
           Message us now instead
         </a>
         <button
           type="button"
           onClick={onReset}
-          className="text-fg-subtle decoration-line-strong hover:text-fg text-sm underline underline-offset-4 transition-colors"
+          className="text-ink-subtle decoration-line-strong hover:text-ink text-sm underline underline-offset-4 transition-colors"
         >
           Send another enquiry
         </button>

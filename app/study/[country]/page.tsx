@@ -93,9 +93,9 @@ export default async function CountryPage({
           ].map(([label, value]) => (
             <div
               key={label}
-              className="rounded-card border-line bg-ink-raised/50 border p-5"
+              className="rounded-card border-line bg-card border p-5"
             >
-              <p className="text-fg-subtle text-xs">{label}</p>
+              <p className="text-ink-subtle text-xs">{label}</p>
               <p className="mt-2 text-sm leading-relaxed font-medium">
                 {value}
               </p>
@@ -105,7 +105,7 @@ export default async function CountryPage({
       </PageHero>
 
       {/* Hard numbers first — this is what students came for */}
-      <Section tone="raised">
+      <Section tone="panel">
         <SectionHeader
           eyebrow="The numbers"
           title="What it costs and what you must prove"
@@ -124,7 +124,7 @@ export default async function CountryPage({
       </Section>
 
       {/* The honest bit */}
-      <Section tone="raised">
+      <Section tone="panel">
         <SectionHeader
           eyebrow="Rejection risk"
           title="What commonly goes wrong"
@@ -142,7 +142,7 @@ export default async function CountryPage({
         </div>
       </Section>
 
-      <Section tone="raised">
+      <Section tone="panel">
         <SectionHeader
           eyebrow="Questions"
           title={`Studying in ${fm.shortName}, answered`}
@@ -170,18 +170,18 @@ export default async function CountryPage({
             <Link
               key={other.slug}
               href={`/study/${other.slug}`}
-              className="group rounded-card border-line bg-ink-raised/50 hover:border-accent/40 flex items-center justify-between gap-4 border p-5 transition-colors"
+              className="group rounded-card border-line bg-card hover:border-brand/40 flex items-center justify-between gap-4 border p-5 transition-colors"
             >
               <div>
-                <p className="font-display font-semibold tracking-tight">
+                <p className="font-bold tracking-[-0.015em]">
                   Study in {other.frontmatter.shortName}
                 </p>
-                <p className="text-fg-muted mt-1.5 text-xs leading-relaxed">
+                <p className="text-ink-muted mt-1.5 text-xs leading-relaxed">
                   {other.frontmatter.tuitionRange}
                 </p>
               </div>
               <ArrowRight
-                className="text-fg-subtle group-hover:text-accent h-4 w-4 shrink-0 transition-colors"
+                className="text-ink-subtle group-hover:text-brand h-4 w-4 shrink-0 transition-colors"
                 aria-hidden="true"
               />
             </Link>

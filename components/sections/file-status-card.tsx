@@ -4,113 +4,112 @@ import { cn } from "@/lib/utils";
 
 /**
  * The hero visual. Deliberately a product mock, not a stock photo — it shows
- * the transparency promise instead of describing it.
+ * the transparency promise instead of describing it, and it reads like a
+ * banking dashboard rather than a marketing graphic.
  * Illustrative sample data, clearly labelled as an example.
  */
 const CURRENT_STAGE = 4; // "Applied"
 
 export function FileStatusCard() {
   return (
-    <div className="relative">
-      {/* Glow beneath the card */}
-      <div
-        aria-hidden="true"
-        className="bg-accent/15 absolute inset-x-6 -bottom-6 -z-10 h-40 rounded-full blur-3xl"
-      />
-
-      <div className="rounded-card-lg border-line-strong bg-ink-raised relative overflow-hidden border shadow-[var(--shadow-card)]">
-        {/* Card header */}
-        <div className="border-line flex items-center justify-between gap-4 border-b px-5 py-4">
-          <div>
-            <p className="text-eyebrow text-fg-subtle font-sans uppercase">
-              Your file
-            </p>
-            <p className="font-display mt-1.5 text-base font-semibold tracking-tight">
-              MSc Data Science · UK
-            </p>
-          </div>
-          <span className="bg-accent/15 text-accent ring-accent/25 rounded-full px-2.5 py-1 text-xs font-medium ring-1">
-            On track
-          </span>
+    <div className="rounded-card-lg border-line bg-card border shadow-[var(--shadow-card)]">
+      {/* Card header */}
+      <div className="border-line flex items-start justify-between gap-4 border-b px-6 py-5">
+        <div>
+          <p className="text-eyebrow text-ink-subtle font-semibold uppercase">
+            Your file
+          </p>
+          <p className="mt-2 text-[1.0625rem] font-bold tracking-[-0.015em]">
+            MSc Data Science · UK
+          </p>
         </div>
+        <span className="bg-brand-tint text-brand shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold">
+          On track
+        </span>
+      </div>
 
-        {/* Stage list */}
-        <ol className="px-5 py-5">
-          {stages.map((stage, i) => {
-            const done = stage.n < CURRENT_STAGE;
-            const current = stage.n === CURRENT_STAGE;
-            const isLast = i === stages.length - 1;
+      {/* Stage list */}
+      <ol className="px-6 py-5">
+        {stages.map((stage, i) => {
+          const done = stage.n < CURRENT_STAGE;
+          const current = stage.n === CURRENT_STAGE;
+          const isLast = i === stages.length - 1;
 
-            return (
-              <li
-                key={stage.key}
-                className="relative flex gap-4 pb-5 last:pb-0"
-              >
-                {/* Connector */}
-                {!isLast && (
-                  <span
-                    aria-hidden="true"
-                    className={cn(
-                      "absolute top-6 left-[11px] h-full w-px",
-                      done ? "bg-accent/40" : "bg-line-strong",
-                    )}
-                  />
-                )}
-
-                {/* Node */}
+          return (
+            <li key={stage.key} className="relative flex gap-4 pb-5 last:pb-0">
+              {/* Connector */}
+              {!isLast && (
                 <span
                   aria-hidden="true"
                   className={cn(
-                    "relative z-10 grid h-6 w-6 shrink-0 place-items-center rounded-full border text-[0.625rem] font-semibold",
-                    done && "border-accent/50 bg-accent text-on-accent",
-                    current &&
-                      "border-accent bg-ink-raised text-accent ring-accent/15 ring-4",
-                    !done &&
-                      !current &&
-                      "border-line-strong bg-ink text-fg-subtle",
+                    "absolute top-7 left-[13px] h-full w-[2px] rounded-full",
+                    done ? "bg-brand" : "bg-line",
+                  )}
+                />
+              )}
+
+              {/* Node */}
+              <span
+                aria-hidden="true"
+                className={cn(
+                  "relative z-10 grid h-7 w-7 shrink-0 place-items-center rounded-full text-[0.6875rem] font-bold",
+                  done && "bg-brand text-on-brand",
+                  current && "bg-brand text-on-brand ring-brand-light ring-4",
+                  !done &&
+                    !current &&
+                    "border-line bg-panel text-ink-subtle border",
+                )}
+              >
+                {done ? <Check className="h-4 w-4" strokeWidth={3} /> : stage.n}
+              </span>
+
+              {/* Label */}
+              <div className="min-w-0 pt-0.5">
+                <p
+                  className={cn(
+                    "text-[0.9375rem] font-semibold",
+                    current || done ? "text-ink" : "text-ink-subtle",
                   )}
                 >
-                  {done ? <Check className="h-3.5 w-3.5" /> : stage.n}
-                </span>
-
-                {/* Label */}
-                <div className="min-w-0 pt-0.5">
-                  <p
-                    className={cn(
-                      "text-sm font-medium",
-                      current
-                        ? "text-fg"
-                        : done
-                          ? "text-fg-muted"
-                          : "text-fg-subtle",
-                    )}
-                  >
-                    {stage.title}
-                    {current && (
-                      <span className="text-accent ml-2 text-xs font-normal">
-                        in progress
-                      </span>
-                    )}
-                  </p>
+                  {stage.title}
                   {current && (
-                    <p className="text-fg-muted mt-1 text-xs leading-relaxed">
-                      4 applications submitted · reference numbers on file
-                    </p>
+                    <span className="text-brand ml-2 text-xs font-semibold">
+                      in progress
+                    </span>
                   )}
-                </div>
-              </li>
-            );
-          })}
-        </ol>
+                </p>
+                {current && (
+                  <ul className="mt-1.5 space-y-1">
+                    {[
+                      "4 applications submitted",
+                      "Reference numbers on file",
+                    ].map((detail) => (
+                      <li
+                        key={detail}
+                        className="text-ink-muted flex items-center gap-2 text-[0.8125rem] leading-relaxed"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="bg-ink-subtle h-1 w-1 shrink-0 rounded-full"
+                        />
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </li>
+          );
+        })}
+      </ol>
 
-        {/* Card footer */}
-        <div className="border-line border-t bg-white/[0.02] px-5 py-3.5">
-          <p className="text-fg-subtle text-[0.6875rem] leading-relaxed">
-            Illustrative example. The live status view arrives with the student
-            portal in the next release — until then you get the same detail by
-            email and WhatsApp.
-          </p>
-        </div>
+      {/* Card footer */}
+      <div className="border-line bg-panel border-t px-6 py-4">
+        <p className="text-ink-subtle text-xs leading-relaxed">
+          Illustrative example. The live status view arrives with the student
+          portal in the next release — until then you get the same detail by
+          email and WhatsApp.
+        </p>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Mail, Phone } from "lucide-react";
-import { LogoMark } from "@/components/site/logo";
+import { Logo } from "@/components/site/logo";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -47,52 +47,51 @@ const socials = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-line bg-ink relative mt-24 border-t">
-      <div className="container-page py-14 md:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_2fr]">
+    <footer className="border-line bg-page border-t">
+      <div className="container-page py-16 md:py-20">
+        <div className="grid gap-12 lg:grid-cols-[1.3fr_2fr] lg:gap-16">
           {/* Brand + contact */}
           <div className="max-w-sm">
-            <div className="flex items-center gap-3">
-              <LogoMark />
-              <span className="font-display text-lg leading-tight font-bold tracking-[-0.03em]">
-                Axis Global
-                <br />
-                Consultants
-              </span>
-            </div>
+            <Logo />
 
-            <p className="text-fg-muted mt-5 text-sm leading-relaxed">
+            <p className="text-ink-muted mt-6 text-[0.9375rem] leading-relaxed">
               Overseas education advisory for Pakistani students. Published
               process, honest assessments, no commission-chasing.
             </p>
 
-            <div className="mt-6 space-y-2.5 text-sm">
+            <div className="mt-6 space-y-3 text-[0.9375rem]">
               <a
                 href={`mailto:${site.contact.email}`}
-                className="text-fg-muted hover:text-accent flex items-center gap-2.5 transition-colors"
+                className="text-ink-muted hover:text-brand flex items-center gap-3 transition-colors"
               >
-                <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <Mail
+                  className="text-brand h-4 w-4 shrink-0"
+                  aria-hidden="true"
+                />
                 {site.contact.email}
               </a>
               <a
                 href={`tel:${site.contact.phone.replace(/\s/g, "")}`}
-                className="text-fg-muted hover:text-accent flex items-center gap-2.5 transition-colors"
+                className="text-ink-muted hover:text-brand flex items-center gap-3 transition-colors"
               >
-                <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <Phone
+                  className="text-brand h-4 w-4 shrink-0"
+                  aria-hidden="true"
+                />
                 {site.contact.phone}
               </a>
               <a
                 href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-fg-muted hover:text-accent flex items-center gap-2.5 transition-colors"
+                className="text-ink-muted hover:text-brand flex items-center gap-3 transition-colors"
               >
-                <WhatsappIcon className="h-4 w-4 shrink-0" />
+                <WhatsappIcon className="text-brand h-4 w-4 shrink-0" />
                 Message us on WhatsApp
               </a>
             </div>
 
-            <p className="text-fg-subtle mt-6 text-xs leading-relaxed">
+            <p className="text-ink-subtle mt-6 text-sm leading-relaxed">
               {site.contact.address.line1}
               <br />
               {site.contact.address.city}, {site.contact.address.country}
@@ -105,15 +104,15 @@ export function SiteFooter() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
             {columns.map((col) => (
               <div key={col.heading}>
-                <h3 className="text-eyebrow text-fg-subtle font-sans uppercase">
+                <h3 className="text-eyebrow text-ink font-semibold uppercase">
                   {col.heading}
                 </h3>
-                <ul className="mt-4 space-y-3">
+                <ul className="mt-5 space-y-3.5">
                   {col.links.map((link) => (
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="text-fg-muted hover:text-fg text-sm transition-colors"
+                        className="text-ink-muted hover:text-brand text-[0.9375rem] transition-colors"
                       >
                         {link.label}
                       </Link>
@@ -127,7 +126,7 @@ export function SiteFooter() {
 
         {/* Bottom bar */}
         <div className="border-line mt-14 flex flex-col gap-6 border-t pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-fg-subtle text-xs">
+          <p className="text-ink-subtle text-sm">
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
 
@@ -139,15 +138,18 @@ export function SiteFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="border-line text-fg-muted hover:border-accent/60 hover:text-accent grid h-9 w-9 place-items-center rounded-full border transition-colors"
+                className="rounded-control border-line text-brand hover:border-brand hover:bg-brand-tint grid h-10 w-10 place-items-center border transition-colors"
               >
-                <Icon className="h-4 w-4" aria-hidden="true" />
+                <Icon
+                  className="h-[1.125rem] w-[1.125rem]"
+                  aria-hidden="true"
+                />
               </a>
             ))}
           </div>
         </div>
 
-        <p className="text-fg-subtle mt-8 max-w-3xl text-[0.6875rem] leading-relaxed">
+        <p className="text-ink-subtle mt-8 max-w-3xl text-xs leading-relaxed">
           Axis Global Consultants is an independent education advisory. We are
           not affiliated with any government department or visa authority.
           Admission and visa decisions rest entirely with the institution and

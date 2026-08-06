@@ -84,14 +84,14 @@ export default function AboutPage() {
         breadcrumbs={breadcrumbs}
       />
 
-      <Section tone="raised">
+      <Section tone="panel">
         <div className="max-w-3xl">
           <SectionHeader
             eyebrow="Why we exist"
             title="The problem, stated plainly"
           />
 
-          <div className="text-fg-muted mt-8 space-y-5 text-[1.0625rem] leading-[1.75]">
+          <div className="text-ink-muted mt-8 space-y-5 text-[1.0625rem] leading-[1.75]">
             <p>
               Overseas education advisory in Pakistan runs on an incentive
               problem. Advice is free, so it gets paid for somewhere else —
@@ -113,7 +113,7 @@ export default function AboutPage() {
               and a student a year behind their classmates for a reason nobody
               explained.
             </p>
-            <p className="text-fg">
+            <p className="text-ink">
               We do not think this requires a clever solution. It requires
               publishing things: the process, the fees, the risk, and the date
               the rules were last checked. Then doing what the published process
@@ -133,11 +133,11 @@ export default function AboutPage() {
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {promises.map((promise, i) => (
             <Reveal key={promise.title} delay={i * 0.05}>
-              <div className="rounded-card border-line bg-ink-raised/50 h-full border p-6">
-                <h3 className="font-display text-base font-semibold tracking-tight">
+              <div className="rounded-card border-line bg-card h-full border p-6">
+                <h3 className="text-base font-bold tracking-[-0.015em]">
                   {promise.title}
                 </h3>
-                <p className="text-fg-muted mt-3 text-sm leading-relaxed">
+                <p className="text-ink-muted mt-3 text-sm leading-relaxed">
                   {promise.body}
                 </p>
               </div>
@@ -146,7 +146,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <Section tone="raised">
+      <Section tone="panel">
         <SectionHeader
           eyebrow="Students"
           title="What students say"
@@ -156,16 +156,16 @@ export default function AboutPage() {
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {testimonials.map((testimonial, i) => (
             <Reveal key={testimonial.quote} delay={i * 0.06}>
-              <figure className="rounded-card border-line-strong bg-ink h-full border border-dashed p-6">
-                <Quote className="text-accent/50 h-5 w-5" aria-hidden="true" />
-                <blockquote className="text-fg-muted mt-4 text-sm leading-relaxed">
+              <figure className="rounded-card border-line-strong bg-page h-full border border-dashed p-6">
+                <Quote className="text-brand/50 h-5 w-5" aria-hidden="true" />
+                <blockquote className="text-ink-muted mt-4 text-sm leading-relaxed">
                   {testimonial.quote}
                 </blockquote>
                 <figcaption className="border-line mt-5 border-t pt-4 text-xs">
-                  <span className="text-fg-subtle block italic">
+                  <span className="text-ink-subtle block italic">
                     {testimonial.name}
                   </span>
-                  <span className="text-fg-subtle mt-1 block">
+                  <span className="text-ink-subtle mt-1 block">
                     {testimonial.detail}
                   </span>
                 </figcaption>
@@ -194,7 +194,7 @@ export default function AboutPage() {
                   aria-hidden="true"
                   className="bg-fg-subtle mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full"
                 />
-                <p className="text-fg-muted text-sm leading-relaxed">{item}</p>
+                <p className="text-ink-muted text-sm leading-relaxed">{item}</p>
               </li>
             ))}
           </ul>

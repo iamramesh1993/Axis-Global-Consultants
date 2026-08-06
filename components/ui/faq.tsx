@@ -7,18 +7,20 @@ import type { Faq } from "@/lib/content-schema";
  */
 export function FaqList({ faqs }: { faqs: readonly Faq[] }) {
   return (
-    <div className="divide-line rounded-card border-line divide-y overflow-hidden border">
+    <div className="divide-line rounded-card border-line bg-card divide-y overflow-hidden border shadow-[var(--shadow-soft)]">
       {faqs.map((faq) => (
-        <details key={faq.q} className="group bg-ink-raised/40">
-          <summary className="font-display hover:text-accent flex cursor-pointer list-none items-start justify-between gap-4 px-5 py-5 text-left text-base font-medium tracking-tight transition-colors md:text-lg">
+        <details key={faq.q} className="group">
+          <summary className="hover:text-brand flex cursor-pointer list-none items-start justify-between gap-5 px-6 py-5 text-left text-base font-semibold tracking-[-0.01em] transition-colors md:text-[1.0625rem]">
             <span>{faq.q}</span>
-            <Plus
-              className="text-accent mt-0.5 h-5 w-5 shrink-0 transition-transform duration-300 group-open:rotate-45"
+            <span
               aria-hidden="true"
-            />
+              className="bg-brand-tint text-brand mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full transition-transform duration-200 group-open:rotate-45"
+            >
+              <Plus className="h-4 w-4" />
+            </span>
           </summary>
-          <div className="-mt-1 px-5 pb-5">
-            <p className="text-fg-muted max-w-2xl text-sm leading-relaxed md:text-[0.9375rem]">
+          <div className="px-6 pb-6">
+            <p className="text-ink-muted max-w-2xl text-[0.9375rem] leading-relaxed md:text-base">
               {faq.a}
             </p>
           </div>

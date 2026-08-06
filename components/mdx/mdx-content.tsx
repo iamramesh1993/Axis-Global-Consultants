@@ -9,36 +9,36 @@ const components: MDXComponents = {
   h2: (props) => (
     <h2
       {...props}
-      className="mt-14 scroll-mt-24 text-[1.75rem] leading-tight font-semibold tracking-[-0.025em] first:mt-0"
+      className="mt-14 scroll-mt-28 text-[1.75rem] leading-tight font-extrabold tracking-[-0.02em] first:mt-0"
     />
   ),
   h3: (props) => (
     <h3
       {...props}
-      className="mt-10 scroll-mt-24 text-xl leading-snug font-semibold tracking-[-0.02em]"
+      className="mt-10 scroll-mt-28 text-xl leading-snug font-bold tracking-[-0.015em]"
     />
   ),
-  p: (props) => <p {...props} className="text-fg-muted mt-5 leading-[1.75]" />,
+  p: (props) => <p {...props} className="text-ink-muted mt-5 leading-[1.75]" />,
   ul: (props) => (
-    <ul {...props} className="text-fg-muted mt-5 space-y-2.5 pl-1" />
+    <ul {...props} className="text-ink-muted mt-5 space-y-3 pl-1" />
   ),
   ol: (props) => (
     <ol
       {...props}
-      className="text-fg-muted marker:text-accent mt-5 list-decimal space-y-2.5 pl-5 marker:font-semibold"
+      className="text-ink-muted marker:text-brand mt-5 list-decimal space-y-3 pl-5 marker:font-bold"
     />
   ),
   li: ({ children, ...props }) => (
-    <li {...props} className="marker:text-accent relative pl-5 leading-[1.7]">
+    <li {...props} className="relative pl-6 leading-[1.7]">
       <span
         aria-hidden="true"
-        className="bg-accent/70 absolute top-[0.7em] left-0 h-1.5 w-1.5 rounded-full [ol_&]:hidden"
+        className="bg-brand absolute top-[0.62em] left-0 h-1.5 w-1.5 rounded-full [ol_&]:hidden"
       />
       {children}
     </li>
   ),
-  strong: (props) => <strong {...props} className="text-fg font-semibold" />,
-  em: (props) => <em {...props} className="text-fg-muted italic" />,
+  strong: (props) => <strong {...props} className="text-ink font-bold" />,
+  em: (props) => <em {...props} className="text-ink-muted italic" />,
   a: ({ href = "", children, ...props }) => {
     const external = /^https?:/.test(href);
     if (external) {
@@ -47,7 +47,7 @@ const components: MDXComponents = {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-accent decoration-accent/30 hover:decoration-accent font-medium underline underline-offset-4 transition-colors"
+          className="text-brand decoration-brand/30 hover:decoration-brand font-semibold underline underline-offset-4 transition-colors"
           {...props}
         >
           {children}
@@ -57,7 +57,7 @@ const components: MDXComponents = {
     return (
       <Link
         href={href}
-        className="text-accent decoration-accent/30 hover:decoration-accent font-medium underline underline-offset-4 transition-colors"
+        className="text-brand decoration-brand/30 hover:decoration-brand font-semibold underline underline-offset-4 transition-colors"
       >
         {children}
       </Link>
@@ -66,31 +66,31 @@ const components: MDXComponents = {
   blockquote: (props) => (
     <blockquote
       {...props}
-      className="border-accent/50 text-fg-muted mt-6 border-l-2 pl-5 italic"
+      className="rounded-r-card border-brand bg-panel text-ink-muted mt-7 border-l-4 py-5 pr-6 pl-6 italic"
     />
   ),
-  hr: () => <hr className="border-line mt-12" />,
+  hr: () => <hr className="border-line mt-14" />,
   table: (props) => (
-    <div className="-mx-5 mt-6 overflow-x-auto px-5 md:mx-0 md:px-0">
+    <div className="md:rounded-card md:border-line -mx-6 mt-7 overflow-x-auto px-6 md:mx-0 md:overflow-hidden md:border md:px-0">
       <table
         {...props}
-        className="w-full min-w-[32rem] border-collapse text-sm"
+        className="w-full min-w-[32rem] border-collapse text-[0.9375rem]"
       />
     </div>
   ),
   th: (props) => (
     <th
       {...props}
-      className="border-line-strong font-display text-fg-subtle border-b px-3 py-2.5 text-left text-xs font-semibold tracking-wide uppercase"
+      className="border-line bg-panel text-ink border-b px-4 py-3 text-left text-xs font-bold tracking-wide uppercase"
     />
   ),
   td: (props) => (
-    <td {...props} className="border-line text-fg-muted border-b px-3 py-2.5" />
+    <td {...props} className="border-line text-ink-muted border-b px-4 py-3" />
   ),
   code: (props) => (
     <code
       {...props}
-      className="text-accent rounded bg-white/[0.06] px-1.5 py-0.5 font-mono text-[0.85em]"
+      className="bg-brand-tint text-brand rounded px-1.5 py-0.5 font-mono text-[0.85em] font-semibold"
     />
   ),
 };

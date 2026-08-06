@@ -76,7 +76,7 @@ export default function PrivacyPage() {
         lead="What we collect through the form, why, and how to make us delete it."
         breadcrumbs={breadcrumbs}
         meta={
-          <p className="text-fg-subtle text-xs">
+          <p className="text-ink-subtle text-xs">
             Last updated {formatDate(LAST_UPDATED)}
           </p>
         }
@@ -84,9 +84,9 @@ export default function PrivacyPage() {
 
       <Section className="pt-0 md:pt-0">
         <div className="max-w-3xl">
-          <div className="rounded-card border-line-strong bg-ink-raised/50 border px-5 py-4">
-            <p className="text-fg-muted text-sm leading-relaxed">
-              <span className="text-fg font-medium">
+          <div className="rounded-card border-line-strong bg-card border px-5 py-4">
+            <p className="text-ink-muted text-sm leading-relaxed">
+              <span className="text-ink font-medium">
                 Placeholder — pending legal review.
               </span>{" "}
               This describes our actual data practices accurately, but it has
@@ -103,7 +103,10 @@ export default function PrivacyPage() {
                 </h2>
                 <div className="mt-4 space-y-4">
                   {section.body.map((paragraph) => (
-                    <p key={paragraph} className="text-fg-muted leading-[1.75]">
+                    <p
+                      key={paragraph}
+                      className="text-ink-muted leading-[1.75]"
+                    >
                       {paragraph}
                     </p>
                   ))}

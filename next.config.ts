@@ -9,13 +9,21 @@ import type { NextConfig } from "next";
  * here so the trade-off is explicit rather than accidental.
  */
 const isProd = process.env.NODE_ENV === "production";
-/**
- * Served over http locally, so upgrade-insecure-requests would rewrite every
- * asset to https and fail the TLS handshake — Safari/WebKit is strict about
- * this. Only emit it where there is real TLS to upgrade to.
- */
-const httpsOnly = process.env.VERCEL ? ["upgrade-insecure-requests"] : [];
 
+/**
+ * Note on `upgrade-insecure-requests`: deliberately absent.
+ *
+ * It rewrites every asset request to https, which fails the TLS handshake on a
+ * local http build — WebKit is strict about this and it breaks the entire
+ * stylesheet, not just one request. Gating it on an env var turned out to be
+ * fragile too: `vercel env pull` writes VERCEL=1 into .env.local, so a local
+ * build silently started emitting it again.
+ *
+ * It is also redundant here. Every source below is already 'self' or an
+ * explicit https origin, Vercel redirects http→https at the edge, and HSTS with
+ * preload pins the domain to https in the browser. So it buys nothing and has
+ * cost two broken builds.
+ */
 const csp = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://connect.facebook.net",
@@ -28,7 +36,6 @@ const csp = [
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",
-  ...httpsOnly,
 ].join("; ");
 
 const securityHeaders = [

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import { Logo } from "@/components/site/logo";
 import { ButtonLink } from "@/components/ui/button";
 import { mainNav } from "@/lib/site";
@@ -15,7 +15,7 @@ export function SiteHeader() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -35,16 +35,14 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-colors duration-300",
-        scrolled || open
-          ? "border-line bg-ink/80 border-b backdrop-blur-xl"
-          : "border-b border-transparent",
+        "border-line bg-page/90 sticky top-0 z-50 border-b backdrop-blur-xl transition-shadow duration-200",
+        (scrolled || open) && "shadow-[0_1px_3px_rgb(15_23_42_/_0.06)]",
       )}
     >
-      <div className="container-page flex h-16 items-center justify-between gap-6 md:h-18">
+      <div className="container-page flex h-18 items-center justify-between gap-6">
         <Logo />
 
-        <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Main" className="hidden items-center gap-0.5 lg:flex">
           {mainNav.map((item) => {
             const active =
               pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -54,10 +52,10 @@ export function SiteHeader() {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "rounded-full px-3 py-2 text-sm transition-colors",
+                  "rounded-lg px-3 py-2 text-[0.9375rem] font-medium transition-colors duration-200",
                   active
-                    ? "text-fg"
-                    : "text-fg-muted hover:text-fg hover:bg-white/[0.05]",
+                    ? "bg-brand-tint text-brand"
+                    : "text-ink-muted hover:bg-panel hover:text-ink",
                 )}
               >
                 {item.label}
@@ -73,6 +71,7 @@ export function SiteHeader() {
             className="hidden sm:inline-flex"
           >
             Book a free assessment
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </ButtonLink>
 
           <button
@@ -81,7 +80,7 @@ export function SiteHeader() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="border-line-strong text-fg hover:border-accent/60 hover:text-accent grid h-10 w-10 place-items-center rounded-full border transition-colors lg:hidden"
+            className="rounded-control border-line-strong text-ink hover:border-brand hover:text-brand grid h-11 w-11 place-items-center border transition-colors lg:hidden"
           >
             {open ? (
               <X className="h-5 w-5" aria-hidden="true" />
@@ -96,20 +95,32 @@ export function SiteHeader() {
       <div
         id="mobile-nav"
         hidden={!open}
-        className="border-line bg-ink border-t lg:hidden"
+        className="border-line bg-page border-t lg:hidden"
       >
-        <nav aria-label="Mobile" className="container-page flex flex-col py-4">
-          {mainNav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="border-line font-display text-fg border-b py-3.5 text-lg tracking-tight last:border-b-0"
-            >
-              {item.longLabel}
-            </Link>
-          ))}
-          <ButtonLink href="/contact" size="lg" className="mt-5 w-full">
+        <nav aria-label="Mobile" className="container-page flex flex-col py-3">
+          {mainNav.map((item) => {
+            const active =
+              pathname === item.href || pathname.startsWith(`${item.href}/`);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "border-line flex items-center justify-between border-b py-4 text-base font-semibold transition-colors last:border-b-0",
+                  active ? "text-brand" : "text-ink",
+                )}
+              >
+                {item.longLabel}
+                <ArrowRight
+                  className="text-ink-subtle h-4 w-4"
+                  aria-hidden="true"
+                />
+              </Link>
+            );
+          })}
+          <ButtonLink href="/contact" size="lg" className="mt-5 mb-2 w-full">
             Book a free assessment
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </ButtonLink>
         </nav>
       </div>

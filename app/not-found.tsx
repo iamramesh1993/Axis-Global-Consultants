@@ -10,14 +10,14 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <div className="bg-grain relative isolate overflow-hidden">
+    <div className="bg-page relative isolate overflow-hidden">
       <div
         aria-hidden="true"
-        className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(100%_60%_at_50%_0%,black,transparent_70%)] opacity-50"
+        className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(100%_60%_at_50%_0%,black,transparent_70%)] opacity-40"
       />
 
       <div className="container-page flex min-h-[70vh] flex-col justify-center py-20">
-        <p className="font-display text-accent text-sm font-semibold tracking-[0.14em] uppercase">
+        <p className="text-brand text-sm font-bold tracking-[0.12em] uppercase">
           404
         </p>
 
@@ -25,7 +25,7 @@ export default function NotFound() {
           That page doesn&apos;t exist.
         </h1>
 
-        <p className="text-lead text-fg-muted mt-6 max-w-lg">
+        <p className="text-lead text-ink-muted mt-6 max-w-lg">
           The link is probably out of date. Everything on the site is one click
           from here.
         </p>
@@ -37,7 +37,7 @@ export default function NotFound() {
           </ButtonLink>
           <ButtonLink
             href="/contact"
-            variant="outline"
+            variant="secondary"
             size="lg"
             className="w-full sm:w-auto"
           >
@@ -49,7 +49,7 @@ export default function NotFound() {
           aria-label="Site pages"
           className="border-line mt-14 border-t pt-8"
         >
-          <p className="text-eyebrow text-fg-subtle font-sans uppercase">
+          <p className="text-eyebrow text-ink-subtle uppercase">
             Or try one of these
           </p>
           <ul className="mt-5 grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -57,7 +57,7 @@ export default function NotFound() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-fg-muted hover:text-accent text-sm transition-colors"
+                  className="text-ink-muted hover:text-brand text-sm transition-colors"
                 >
                   {item.longLabel}
                 </Link>

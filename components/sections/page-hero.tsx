@@ -10,24 +10,24 @@ export function Breadcrumbs({
 }) {
   return (
     <nav aria-label="Breadcrumb">
-      <ol className="text-fg-subtle flex flex-wrap items-center gap-1 text-xs">
+      <ol className="text-ink-subtle flex flex-wrap items-center gap-1 text-sm">
         {items.map((item, i) => {
           const isLast = i === items.length - 1;
           return (
             <li key={item.path} className="flex items-center gap-1">
               {isLast ? (
-                <span aria-current="page" className="text-fg-muted">
+                <span aria-current="page" className="text-ink-muted">
                   {item.name}
                 </span>
               ) : (
                 <>
                   <Link
                     href={item.path}
-                    className="hover:text-accent transition-colors"
+                    className="hover:text-brand transition-colors"
                   >
                     {item.name}
                   </Link>
-                  <ChevronRight className="h-3 w-3" aria-hidden="true" />
+                  <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </>
               )}
             </li>
@@ -58,18 +58,17 @@ export function PageHero({
 }) {
   return (
     <section
-      className={cn("bg-grain relative isolate overflow-hidden", className)}
+      className={cn(
+        "border-line bg-page relative isolate overflow-hidden border-b",
+        className,
+      )}
     >
       <div
         aria-hidden="true"
-        className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(120%_70%_at_30%_0%,black,transparent_70%)] opacity-50"
-      />
-      <div
-        aria-hidden="true"
-        className="bg-accent/8 absolute -top-44 left-[15%] -z-10 h-[26rem] w-[26rem] rounded-full blur-[110px]"
+        className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(110%_70%_at_25%_0%,black,transparent_70%)] opacity-40"
       />
 
-      <div className="container-page pt-10 pb-14 md:pt-14 md:pb-20">
+      <div className="container-page pt-10 pb-16 md:pt-14 md:pb-20">
         {breadcrumbs && (
           <Reveal>
             <Breadcrumbs items={breadcrumbs} />
@@ -78,7 +77,7 @@ export function PageHero({
 
         {eyebrow && (
           <Reveal delay={0.04}>
-            <p className="text-eyebrow text-accent mt-8 font-sans uppercase">
+            <p className="text-eyebrow text-brand mt-8 font-semibold uppercase">
               {eyebrow}
             </p>
           </Reveal>
@@ -94,7 +93,7 @@ export function PageHero({
 
         {lead && (
           <Reveal delay={0.12}>
-            <p className="text-lead text-fg-muted mt-6 max-w-2xl">{lead}</p>
+            <p className="text-lead text-ink-muted mt-6 max-w-2xl">{lead}</p>
           </Reveal>
         )}
 

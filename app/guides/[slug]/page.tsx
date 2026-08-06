@@ -80,7 +80,7 @@ export default async function GuidePage({
         lead={fm.excerpt}
         breadcrumbs={breadcrumbs}
         meta={
-          <div className="text-fg-subtle flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">
+          <div className="text-ink-subtle flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">
             <span>{formatDate(fm.date)}</span>
             <span aria-hidden="true">·</span>
             <span>{fm.readingMinutes} min read</span>
@@ -113,7 +113,7 @@ export default async function GuidePage({
       </Section>
 
       {fm.faqs.length > 0 && (
-        <Section tone="raised">
+        <Section tone="panel">
           <SectionHeader eyebrow="Questions" title="Quick answers" />
           <div className="mt-10 max-w-3xl">
             <FaqList faqs={fm.faqs} />
@@ -138,11 +138,11 @@ export default async function GuidePage({
         lead="Send us your grades, budget and timeline. We will tell you exactly how these rules apply to you — before you pay anyone a deposit."
       />
 
-      <Section tone="raised">
+      <Section tone="panel">
         <div className="flex flex-col gap-8">
           <Link
             href="/guides"
-            className="text-fg-muted hover:text-accent inline-flex items-center gap-2 text-sm transition-colors"
+            className="text-ink-muted hover:text-brand inline-flex items-center gap-2 text-sm transition-colors"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             All guides
@@ -154,18 +154,18 @@ export default async function GuidePage({
                 <Link
                   key={other.slug}
                   href={`/guides/${other.slug}`}
-                  className="group rounded-card border-line bg-ink hover:border-accent/40 flex items-start justify-between gap-4 border p-5 transition-colors"
+                  className="group rounded-card border-line bg-page hover:border-brand/40 flex items-start justify-between gap-4 border p-5 transition-colors"
                 >
                   <div>
-                    <p className="font-display leading-snug font-semibold tracking-tight">
+                    <p className="leading-snug font-bold tracking-[-0.015em]">
                       {other.frontmatter.title}
                     </p>
-                    <p className="text-fg-subtle mt-1.5 text-xs">
+                    <p className="text-ink-subtle mt-1.5 text-xs">
                       {other.frontmatter.readingMinutes} min read
                     </p>
                   </div>
                   <ArrowRight
-                    className="text-fg-subtle group-hover:text-accent mt-1 h-4 w-4 shrink-0 transition-colors"
+                    className="text-ink-subtle group-hover:text-brand mt-1 h-4 w-4 shrink-0 transition-colors"
                     aria-hidden="true"
                   />
                 </Link>

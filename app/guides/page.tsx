@@ -36,9 +36,9 @@ export default function GuidesPage() {
         breadcrumbs={breadcrumbs}
       />
 
-      <Section tone="raised">
+      <Section tone="panel">
         {guides.length === 0 ? (
-          <p className="text-fg-muted">
+          <p className="text-ink-muted">
             New guides are on the way. In the meantime, the destination pages
             carry the current figures.
           </p>
@@ -48,28 +48,28 @@ export default function GuidesPage() {
               <Reveal key={guide.slug} delay={i * 0.06}>
                 <Link
                   href={`/guides/${guide.slug}`}
-                  className="group rounded-card border-line bg-ink hover:border-accent/40 flex h-full flex-col border p-6 transition-[border-color,transform] duration-300 [transition-timing-function:var(--ease-out-soft)] hover:-translate-y-1 md:p-7"
+                  className="group rounded-card border-line bg-page hover:border-brand/40 flex h-full flex-col border p-6 transition-[border-color,transform] duration-300 [transition-timing-function:var(--ease-out-soft)] hover:-translate-y-1 md:p-7"
                 >
                   <div className="flex flex-wrap items-center gap-2">
                     {guide.frontmatter.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="border-line text-fg-subtle rounded-full border px-2.5 py-1 text-[0.6875rem]"
+                        className="border-line text-ink-subtle rounded-full border px-2.5 py-1 text-[0.6875rem]"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
 
-                  <h2 className="font-display group-hover:text-accent mt-5 text-xl leading-snug font-semibold tracking-tight transition-colors">
+                  <h2 className="group-hover:text-brand mt-5 text-xl leading-snug font-bold tracking-[-0.015em] transition-colors">
                     {guide.frontmatter.title}
                   </h2>
 
-                  <p className="text-fg-muted mt-3 flex-1 text-sm leading-relaxed">
+                  <p className="text-ink-muted mt-3 flex-1 text-sm leading-relaxed">
                     {guide.frontmatter.excerpt}
                   </p>
 
-                  <p className="text-fg-subtle mt-6 text-xs">
+                  <p className="text-ink-subtle mt-6 text-xs">
                     {formatDate(guide.frontmatter.date)} ·{" "}
                     {guide.frontmatter.readingMinutes} min read
                   </p>

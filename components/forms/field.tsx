@@ -9,9 +9,9 @@ import { cn } from "@/lib/utils";
  * the viewport on focus, which feels broken and is the classic mobile-form bug.
  */
 const controlBase =
-  "w-full rounded-xl border bg-ink-raised/70 px-4 text-base text-fg " +
-  "placeholder:text-fg-subtle transition-colors outline-none " +
-  "focus:border-accent focus:ring-2 focus:ring-accent/25 md:text-[0.9375rem]";
+  "w-full rounded-control border bg-card px-4 text-base text-ink " +
+  "placeholder:text-ink-subtle transition-[border-color,box-shadow] duration-200 outline-none " +
+  "focus:border-brand focus:ring-4 focus:ring-brand-light md:text-[0.9375rem]";
 
 function FieldShell({
   id,
@@ -34,16 +34,16 @@ function FieldShell({
     <div className={cn("flex flex-col gap-2", className)}>
       <label
         htmlFor={id}
-        className="flex items-baseline gap-2 text-sm font-medium"
+        className="flex items-baseline gap-2 text-sm font-semibold"
       >
         {label}
         {optional && (
-          <span className="text-fg-subtle text-xs font-normal">optional</span>
+          <span className="text-ink-subtle text-xs font-normal">optional</span>
         )}
       </label>
       {children}
       {hint && !error && (
-        <p id={`${id}-hint`} className="text-fg-subtle text-xs">
+        <p id={`${id}-hint`} className="text-ink-subtle text-xs">
           {hint}
         </p>
       )}
@@ -51,7 +51,7 @@ function FieldShell({
         <p
           id={`${id}-error`}
           role="alert"
-          className="text-danger flex items-center gap-1.5 text-xs"
+          className="text-danger flex items-center gap-1.5 text-xs font-medium"
         >
           <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
           {error}
@@ -168,7 +168,7 @@ export const SelectField = forwardRef<HTMLSelectElement, SelectFieldProps>(
             ))}
           </select>
           <ChevronDown
-            className="text-fg-subtle pointer-events-none absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2"
+            className="text-ink-subtle pointer-events-none absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2"
             aria-hidden="true"
           />
         </div>

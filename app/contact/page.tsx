@@ -39,7 +39,7 @@ export default function ContactPage() {
           {/* Form first in the DOM: it is the point of the page, and on mobile
               it should be what you land on rather than the address block. */}
           <Reveal>
-            <div className="rounded-card-lg border-line-strong bg-ink-raised/60 border p-6 shadow-[var(--shadow-card)] md:p-8">
+            <div className="rounded-card-lg border-line-strong bg-card border p-6 shadow-[var(--shadow-card)] md:p-8">
               <LeadForm />
             </div>
           </Reveal>
@@ -47,10 +47,10 @@ export default function ContactPage() {
           <Reveal delay={0.08}>
             <div className="space-y-8">
               <div>
-                <h2 className="font-display text-lg font-semibold tracking-tight">
+                <h2 className="text-lg font-bold tracking-[-0.015em]">
                   Rather just message us?
                 </h2>
-                <p className="text-fg-muted mt-3 text-sm leading-relaxed">
+                <p className="text-ink-muted mt-3 text-sm leading-relaxed">
                   That is genuinely fine. WhatsApp is how most of our
                   conversations start.
                 </p>
@@ -60,12 +60,12 @@ export default function ContactPage() {
                     href={whatsappLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-card border-line bg-ink-raised/50 hover:border-accent/40 flex items-center gap-3 border px-5 py-4 transition-colors"
+                    className="rounded-card border-line bg-card hover:border-brand/40 flex items-center gap-3 border px-5 py-4 transition-colors"
                   >
-                    <WhatsappIcon className="text-accent h-5 w-5 shrink-0" />
+                    <WhatsappIcon className="text-brand h-5 w-5 shrink-0" />
                     <span className="text-sm">
                       <span className="block font-medium">WhatsApp</span>
-                      <span className="text-fg-muted">
+                      <span className="text-ink-muted">
                         {site.contact.phone}
                       </span>
                     </span>
@@ -73,15 +73,15 @@ export default function ContactPage() {
 
                   <a
                     href={`tel:${site.contact.phone.replace(/\s/g, "")}`}
-                    className="rounded-card border-line bg-ink-raised/50 hover:border-accent/40 flex items-center gap-3 border px-5 py-4 transition-colors"
+                    className="rounded-card border-line bg-card hover:border-brand/40 flex items-center gap-3 border px-5 py-4 transition-colors"
                   >
                     <Phone
-                      className="text-accent h-5 w-5 shrink-0"
+                      className="text-brand h-5 w-5 shrink-0"
                       aria-hidden="true"
                     />
                     <span className="text-sm">
                       <span className="block font-medium">Call</span>
-                      <span className="text-fg-muted">
+                      <span className="text-ink-muted">
                         {site.contact.phone}
                       </span>
                     </span>
@@ -89,15 +89,15 @@ export default function ContactPage() {
 
                   <a
                     href={`mailto:${site.contact.email}`}
-                    className="rounded-card border-line bg-ink-raised/50 hover:border-accent/40 flex items-center gap-3 border px-5 py-4 transition-colors"
+                    className="rounded-card border-line bg-card hover:border-brand/40 flex items-center gap-3 border px-5 py-4 transition-colors"
                   >
                     <Mail
-                      className="text-accent h-5 w-5 shrink-0"
+                      className="text-brand h-5 w-5 shrink-0"
                       aria-hidden="true"
                     />
                     <span className="text-sm">
                       <span className="block font-medium">Email</span>
-                      <span className="text-fg-muted">
+                      <span className="text-ink-muted">
                         {site.contact.email}
                       </span>
                     </span>
@@ -105,14 +105,14 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="rounded-card border-line bg-ink-raised/40 border p-5">
-                <h3 className="text-eyebrow text-fg-subtle font-sans uppercase">
+              <div className="rounded-card border-line bg-card border p-5">
+                <h3 className="text-eyebrow text-ink-subtle uppercase">
                   Office
                 </h3>
                 <div className="mt-4 space-y-3 text-sm">
-                  <p className="text-fg-muted flex gap-3">
+                  <p className="text-ink-muted flex gap-3">
                     <MapPin
-                      className="text-accent/70 mt-0.5 h-4 w-4 shrink-0"
+                      className="text-brand/70 mt-0.5 h-4 w-4 shrink-0"
                       aria-hidden="true"
                     />
                     <span>
@@ -122,9 +122,9 @@ export default function ContactPage() {
                       {site.contact.address.country}
                     </span>
                   </p>
-                  <p className="text-fg-muted flex gap-3">
+                  <p className="text-ink-muted flex gap-3">
                     <Clock
-                      className="text-accent/70 mt-0.5 h-4 w-4 shrink-0"
+                      className="text-brand/70 mt-0.5 h-4 w-4 shrink-0"
                       aria-hidden="true"
                     />
                     {site.contact.hours}
@@ -132,11 +132,11 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="rounded-card border-accent/25 bg-accent/[0.05] border p-5">
-                <h3 className="font-display text-sm font-semibold tracking-tight">
+              <div className="rounded-card border-brand/25 bg-brand/[0.05] border p-5">
+                <h3 className="text-sm font-bold tracking-[-0.015em]">
                   What happens next
                 </h3>
-                <ol className="text-fg-muted mt-4 space-y-3 text-sm">
+                <ol className="text-ink-muted mt-4 space-y-3 text-sm">
                   {[
                     "An advisor reads what you sent — not an autoresponder.",
                     "We WhatsApp or call you within one working day.",
@@ -144,7 +144,7 @@ export default function ContactPage() {
                     "You decide whether to continue. No follow-up pressure.",
                   ].map((step, i) => (
                     <li key={step} className="flex gap-3">
-                      <span className="bg-accent/20 text-accent grid h-5 w-5 shrink-0 place-items-center rounded-full text-[0.625rem] font-semibold">
+                      <span className="bg-brand/20 text-brand grid h-5 w-5 shrink-0 place-items-center rounded-full text-[0.625rem] font-semibold">
                         {i + 1}
                       </span>
                       <span className="leading-relaxed">{step}</span>

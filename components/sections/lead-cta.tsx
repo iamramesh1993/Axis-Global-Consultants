@@ -15,16 +15,16 @@ export function LeadCta({
   eyebrow?: string;
 }) {
   return (
-    <Section id="assessment" className="scroll-mt-24">
+    <Section id="assessment" tone="panel">
       <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <Reveal>
-          <p className="text-eyebrow text-accent font-sans uppercase">
+          <p className="text-eyebrow text-brand font-semibold uppercase">
             {eyebrow}
           </p>
           <h2 className="text-heading mt-4">{title}</h2>
-          <p className="text-lead text-fg-muted mt-5">{lead}</p>
+          <p className="text-lead text-ink-muted mt-5">{lead}</p>
 
-          <ul className="border-line mt-8 space-y-4 border-t pt-8">
+          <ul className="border-line mt-9 space-y-5 border-t pt-9">
             {[
               ["One working day", "That is when you hear back from a person."],
               [
@@ -39,19 +39,19 @@ export function LeadCta({
               <li key={label} className="flex gap-4">
                 <span
                   aria-hidden="true"
-                  className="bg-accent mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
+                  className="bg-brand mt-2 h-2 w-2 shrink-0 rounded-full"
                 />
                 <div>
-                  <p className="text-sm font-medium">{label}</p>
-                  <p className="text-fg-muted mt-1 text-sm">{body}</p>
+                  <p className="text-[0.9375rem] font-bold">{label}</p>
+                  <p className="text-ink-muted mt-1 text-[0.9375rem]">{body}</p>
                 </div>
               </li>
             ))}
           </ul>
         </Reveal>
 
-        <Reveal delay={0.1} y={24}>
-          <div className="rounded-card-lg border-line-strong bg-ink-raised/60 border p-6 shadow-[var(--shadow-card)] md:p-8">
+        <Reveal delay={0.1} y={20}>
+          <div className="rounded-card-lg border-line bg-card border p-7 shadow-[var(--shadow-card)] md:p-9">
             <LeadForm defaultCountry={defaultCountry} />
           </div>
         </Reveal>

@@ -1,32 +1,25 @@
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, PlayCircle } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { FileStatusCard } from "@/components/sections/file-status-card";
+import { HeroBackdrop } from "@/components/sections/hero-backdrop";
 
 export function Hero() {
   return (
-    <section className="bg-grain relative isolate overflow-hidden">
-      {/* Backdrop: hairline grid, faded out toward the bottom */}
-      <div
-        aria-hidden="true"
-        className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(120%_80%_at_50%_0%,black,transparent_75%)] opacity-60"
-      />
-      {/* Accent bloom behind the headline */}
-      <div
-        aria-hidden="true"
-        className="bg-accent/9 absolute -top-48 left-1/2 -z-10 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full blur-[110px] md:left-[24%]"
-      />
+    <section className="bg-page relative isolate overflow-hidden">
+      <HeroBackdrop />
 
-      <div className="container-page relative grid items-center gap-14 pt-14 pb-20 md:pt-20 md:pb-28 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pt-24">
+      <div className="container-page relative grid items-center gap-14 pt-10 pb-16 md:pt-14 md:pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         {/* Copy */}
         <div>
           <Reveal>
-            <span className="border-line-strong text-eyebrow text-fg-muted inline-flex items-center gap-2 rounded-full border bg-white/[0.03] px-3.5 py-1.5 font-sans uppercase">
+            <span className="border-line bg-card text-ink-muted inline-flex items-center gap-2.5 rounded-full border px-4 py-2 text-xs font-semibold tracking-[0.04em] uppercase shadow-[0_1px_2px_rgb(15_23_42_/_0.04)]">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="bg-accent absolute inline-flex h-full w-full animate-ping rounded-full opacity-70" />
-                <span className="bg-accent relative inline-flex h-1.5 w-1.5 rounded-full" />
+                <span className="bg-brand absolute inline-flex h-full w-full animate-ping rounded-full opacity-70" />
+                <span className="bg-brand relative inline-flex h-1.5 w-1.5 rounded-full" />
               </span>
-              Now advising for Jan &amp; Sep 2027 intakes
+              Now advising for
+              <span className="text-brand">Jan &amp; Sep 2027 intakes</span>
             </span>
           </Reveal>
 
@@ -34,14 +27,13 @@ export function Hero() {
             <h1 className="text-display-xl mt-7">
               Know exactly
               <br />
-              where you
-              <br />
-              <span className="text-gradient-accent">stand.</span>
+              where you{" "}
+              <span className="brand-underline whitespace-nowrap">stand.</span>
             </h1>
           </Reveal>
 
           <Reveal delay={0.12}>
-            <p className="text-lead text-fg-muted mt-7 max-w-lg">
+            <p className="text-lead text-ink-muted mt-7 max-w-xl">
               We help Pakistani students get into universities in the UK,
               Canada, Australia and Uzbekistan. Our whole process is published
               up front — including the parts other consultants would rather you
@@ -61,17 +53,18 @@ export function Hero() {
               </ButtonLink>
               <ButtonLink
                 href="/how-it-works"
-                variant="outline"
+                variant="secondary"
                 size="lg"
                 className="w-full sm:w-auto"
               >
                 See how it works
+                <PlayCircle className="h-4 w-4" aria-hidden="true" />
               </ButtonLink>
             </div>
           </Reveal>
 
           <Reveal delay={0.24}>
-            <ul className="mt-9 flex flex-wrap gap-x-6 gap-y-3">
+            <ul className="mt-9 flex flex-wrap gap-x-7 gap-y-3">
               {[
                 "No commission-chasing",
                 "Honest fit assessment",
@@ -79,12 +72,14 @@ export function Hero() {
               ].map((item) => (
                 <li
                   key={item}
-                  className="text-fg-muted flex items-center gap-2 text-sm"
+                  className="text-ink-muted flex items-center gap-2.5 text-[0.9375rem] font-medium"
                 >
-                  <Check
-                    className="text-accent h-4 w-4 shrink-0"
+                  <span
                     aria-hidden="true"
-                  />
+                    className="bg-brand-tint grid h-5 w-5 shrink-0 place-items-center rounded-full"
+                  >
+                    <Check className="text-brand h-3 w-3" strokeWidth={3} />
+                  </span>
                   {item}
                 </li>
               ))}
@@ -93,7 +88,7 @@ export function Hero() {
         </div>
 
         {/* The visual: a mock of the file-status view students actually get */}
-        <Reveal delay={0.15} y={28} className="relative lg:pl-6">
+        <Reveal delay={0.15} y={24} className="relative lg:pl-4">
           <FileStatusCard />
         </Reveal>
       </div>

@@ -152,7 +152,7 @@ export default function HowItWorksPage() {
       />
 
       {/* Stage-by-stage detail */}
-      <Section tone="raised">
+      <Section tone="panel">
         <SectionHeader
           eyebrow="Stage by stage"
           title="Where your file goes, and what comes out of it"
@@ -163,22 +163,22 @@ export default function HowItWorksPage() {
             const detail = stageDetail[stage.key];
             return (
               <Reveal as="li" key={stage.key} delay={i * 0.04}>
-                <div className="rounded-card border-line bg-ink border p-6 md:p-8">
+                <div className="rounded-card border-line bg-page border p-6 md:p-8">
                   <div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
                     <div className="lg:w-72 lg:shrink-0">
                       <div className="flex items-center gap-3">
-                        <span className="bg-accent font-display text-on-accent grid h-8 w-8 place-items-center rounded-full text-xs font-bold">
+                        <span className="bg-brand text-on-brand grid h-8 w-8 place-items-center rounded-full text-xs font-bold">
                           {stage.n}
                         </span>
-                        <h3 className="font-display text-xl font-semibold tracking-tight">
+                        <h3 className="text-xl font-bold tracking-[-0.015em]">
                           {stage.title}
                         </h3>
                       </div>
-                      <p className="text-fg-muted mt-4 text-sm leading-relaxed">
+                      <p className="text-ink-muted mt-4 text-sm leading-relaxed">
                         {stage.blurb}
                       </p>
                       {detail && (
-                        <p className="text-fg-subtle mt-4 inline-flex items-center gap-2 text-xs">
+                        <p className="text-ink-subtle mt-4 inline-flex items-center gap-2 text-xs">
                           <Clock className="h-3.5 w-3.5" aria-hidden="true" />
                           Typically {detail.typical}
                         </p>
@@ -187,29 +187,29 @@ export default function HowItWorksPage() {
 
                     {detail && (
                       <div className="border-line flex-1 border-t pt-6 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-12">
-                        <p className="text-eyebrow text-fg-subtle font-sans uppercase">
+                        <p className="text-eyebrow text-ink-subtle uppercase">
                           What we do
                         </p>
                         <ul className="mt-4 space-y-2.5">
                           {detail.does.map((item) => (
                             <li key={item} className="flex gap-3">
                               <Check
-                                className="text-accent mt-0.5 h-4 w-4 shrink-0"
+                                className="text-brand mt-0.5 h-4 w-4 shrink-0"
                                 aria-hidden="true"
                               />
-                              <span className="text-fg-muted text-sm leading-relaxed">
+                              <span className="text-ink-muted text-sm leading-relaxed">
                                 {item}
                               </span>
                             </li>
                           ))}
                         </ul>
-                        <p className="bg-accent/[0.07] mt-5 flex gap-3 rounded-xl px-4 py-3">
+                        <p className="bg-brand/[0.07] mt-5 flex gap-3 rounded-xl px-4 py-3">
                           <FileText
-                            className="text-accent mt-0.5 h-4 w-4 shrink-0"
+                            className="text-brand mt-0.5 h-4 w-4 shrink-0"
                             aria-hidden="true"
                           />
                           <span className="text-sm leading-relaxed">
-                            <span className="text-fg-subtle">You get: </span>
+                            <span className="text-ink-subtle">You get: </span>
                             {detail.output}
                           </span>
                         </p>
@@ -233,18 +233,18 @@ export default function HowItWorksPage() {
 
         <div className="mt-12 grid gap-5 lg:grid-cols-2">
           <Reveal>
-            <div className="rounded-card border-accent/30 bg-accent/[0.05] h-full border p-6 md:p-8">
-              <h3 className="font-display text-lg font-semibold tracking-tight">
+            <div className="rounded-card border-brand/30 bg-brand/[0.05] h-full border p-6 md:p-8">
+              <h3 className="text-lg font-bold tracking-[-0.015em]">
                 Included in our service fee
               </h3>
               <ul className="mt-6 space-y-3">
                 {included.map((item) => (
                   <li key={item} className="flex gap-3">
                     <Check
-                      className="text-accent mt-0.5 h-4 w-4 shrink-0"
+                      className="text-brand mt-0.5 h-4 w-4 shrink-0"
                       aria-hidden="true"
                     />
-                    <span className="text-fg-muted text-sm leading-relaxed">
+                    <span className="text-ink-muted text-sm leading-relaxed">
                       {item}
                     </span>
                   </li>
@@ -254,11 +254,11 @@ export default function HowItWorksPage() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <div className="rounded-card border-line bg-ink-raised/50 h-full border p-6 md:p-8">
-              <h3 className="font-display text-lg font-semibold tracking-tight">
+            <div className="rounded-card border-line bg-card h-full border p-6 md:p-8">
+              <h3 className="text-lg font-bold tracking-[-0.015em]">
                 Third-party costs you pay directly
               </h3>
-              <p className="text-fg-subtle mt-3 text-sm">
+              <p className="text-ink-subtle mt-3 text-sm">
                 These never pass through us. You pay the authority or
                 institution yourself, so nobody can add a margin you cannot see.
               </p>
@@ -266,10 +266,10 @@ export default function HowItWorksPage() {
                 {notIncluded.map((item) => (
                   <li key={item} className="flex gap-3">
                     <X
-                      className="text-fg-subtle mt-0.5 h-4 w-4 shrink-0"
+                      className="text-ink-subtle mt-0.5 h-4 w-4 shrink-0"
                       aria-hidden="true"
                     />
-                    <span className="text-fg-muted text-sm leading-relaxed">
+                    <span className="text-ink-muted text-sm leading-relaxed">
                       {item}
                     </span>
                   </li>
@@ -280,8 +280,8 @@ export default function HowItWorksPage() {
         </div>
 
         <Reveal delay={0.12}>
-          <p className="rounded-card border-line bg-ink-raised/40 text-fg-muted mx-auto mt-8 max-w-3xl border px-6 py-5 text-sm leading-relaxed">
-            <span className="text-fg font-medium">
+          <p className="rounded-card border-line bg-card text-ink-muted mx-auto mt-8 max-w-3xl border px-6 py-5 text-sm leading-relaxed">
+            <span className="text-ink font-medium">
               Our service fee is quoted per case, not per brochure.
             </span>{" "}
             It depends on the destination and how many applications you want,
@@ -292,7 +292,7 @@ export default function HowItWorksPage() {
         </Reveal>
       </Section>
 
-      <Section tone="raised">
+      <Section tone="panel">
         <SectionHeader
           eyebrow="Questions"
           title="The ones people actually ask"

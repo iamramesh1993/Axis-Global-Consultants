@@ -35,23 +35,28 @@ const comparisons = [
 
 export function WhyUs() {
   return (
-    <Section id="why-us">
+    <Section id="why-us" tone="panel">
       <SectionHeader
         eyebrow="Why us"
-        title="The old way, and how we do it instead."
+        title={
+          <>
+            Why students trust <span className="text-brand">Axis Global</span>
+          </>
+        }
         lead="Not a swipe at anyone in particular. Just the specific things students tell us went wrong last time."
+        align="center"
       />
 
-      <div className="rounded-card-lg border-line mt-12 overflow-hidden border">
+      <div className="rounded-card border-line bg-card mt-14 overflow-hidden border shadow-[var(--shadow-soft)]">
         {/* Column headers — desktop only; mobile gets inline labels instead */}
-        <div className="border-line bg-ink-raised/60 hidden border-b md:grid md:grid-cols-2">
-          <div className="px-6 py-4">
-            <p className="text-eyebrow text-fg-subtle font-sans uppercase">
+        <div className="border-line bg-panel hidden border-b md:grid md:grid-cols-2">
+          <div className="px-7 py-4">
+            <p className="text-eyebrow text-ink-subtle font-semibold uppercase">
               The old way
             </p>
           </div>
-          <div className="border-line border-l px-6 py-4">
-            <p className="text-eyebrow text-accent font-sans uppercase">
+          <div className="border-line border-l px-7 py-4">
+            <p className="text-eyebrow text-brand font-semibold uppercase">
               The Axis way
             </p>
           </div>
@@ -61,25 +66,29 @@ export function WhyUs() {
           {comparisons.map((row, i) => (
             <Reveal as="li" key={row.ours} delay={i * 0.04}>
               <div className="grid md:grid-cols-2">
-                <div className="flex gap-3 px-6 py-5">
-                  <X
-                    className="text-fg-subtle mt-0.5 h-4 w-4 shrink-0"
+                <div className="flex gap-3.5 px-7 py-6">
+                  <span
                     aria-hidden="true"
-                  />
-                  <p className="text-fg-subtle text-sm leading-relaxed">
-                    <span className="mb-1 block text-xs font-medium tracking-wide uppercase md:hidden">
+                    className="bg-panel mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full"
+                  >
+                    <X className="text-ink-subtle h-3 w-3" strokeWidth={3} />
+                  </span>
+                  <p className="text-ink-subtle text-[0.9375rem] leading-relaxed">
+                    <span className="mb-1.5 block text-[0.6875rem] font-semibold tracking-[0.08em] uppercase md:hidden">
                       Old way
                     </span>
                     {row.old}
                   </p>
                 </div>
-                <div className="border-line bg-ink-raised/30 flex gap-3 border-t px-6 py-5 md:border-t-0 md:border-l">
-                  <Check
-                    className="text-accent mt-0.5 h-4 w-4 shrink-0"
+                <div className="border-line flex gap-3.5 border-t px-7 py-6 md:border-t-0 md:border-l">
+                  <span
                     aria-hidden="true"
-                  />
-                  <p className="text-fg text-sm leading-relaxed">
-                    <span className="text-accent mb-1 block text-xs font-medium tracking-wide uppercase md:hidden">
+                    className="bg-brand-tint mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full"
+                  >
+                    <Check className="text-brand h-3 w-3" strokeWidth={3} />
+                  </span>
+                  <p className="text-ink text-[0.9375rem] leading-relaxed">
+                    <span className="text-brand mb-1.5 block text-[0.6875rem] font-semibold tracking-[0.08em] uppercase md:hidden">
                       Axis way
                     </span>
                     {row.ours}
