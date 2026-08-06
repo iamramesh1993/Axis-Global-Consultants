@@ -87,7 +87,7 @@ export default function TermsPage() {
         }
       />
 
-      <Section className="pt-0 md:pt-0">
+      <Section spacing="flushTop">
         <div className="max-w-3xl">
           <div className="space-y-12">
             {sections.map((section) => (

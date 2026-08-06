@@ -15,6 +15,7 @@ import {
 import { getAllGuides, getGuide, getGuideSlugs } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
 import { formatDate } from "@/lib/format";
+import { cn } from "@/lib/utils";
 
 export const dynamicParams = false;
 
@@ -106,29 +107,38 @@ export default async function GuidePage({
         }
       />
 
-      <Section className="pt-0 md:pt-0">
+      <Section spacing="flushTop">
         <article className="max-w-3xl">
           <MdxContent source={doc.body} />
         </article>
       </Section>
 
-      {fm.faqs.length > 0 && (
+      {/*
+        FAQs and sources share one section. They were two, with the second
+        zeroing its top padding to sit close to the first — which produced an
+        80px boundary on a page where every other boundary was 160px. Grouping
+        related blocks inside a section is the right way to say "these belong
+        together"; zeroing padding just breaks the rhythm.
+      */}
+      {(fm.faqs.length > 0 || fm.sources.length > 0) && (
         <Section tone="panel">
-          <SectionHeader eyebrow="Questions" title="Quick answers" />
-          <div className="mt-10 max-w-3xl">
-            <FaqList faqs={fm.faqs} />
-          </div>
-        </Section>
-      )}
+          {fm.faqs.length > 0 && (
+            <>
+              <SectionHeader eyebrow="Questions" title="Quick answers" />
+              <div className="mt-10 max-w-3xl">
+                <FaqList faqs={fm.faqs} />
+              </div>
+            </>
+          )}
 
-      {fm.sources.length > 0 && (
-        <Section className="pt-0 md:pt-0">
-          <div className="max-w-3xl">
-            <SourceList
-              sources={fm.sources}
-              verifiedOn={fm.updated ?? fm.date}
-            />
-          </div>
+          {fm.sources.length > 0 && (
+            <div className={cn("max-w-3xl", fm.faqs.length > 0 && "mt-8")}>
+              <SourceList
+                sources={fm.sources}
+                verifiedOn={fm.updated ?? fm.date}
+              />
+            </div>
+          )}
         </Section>
       )}
 

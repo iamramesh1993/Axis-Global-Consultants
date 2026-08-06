@@ -30,7 +30,10 @@ const claims = [
 
 export function TrustStrip() {
   return (
-    <section className="bg-page pb-4">
+    /* A tight band under the hero rather than a full section — it belongs to
+       the hero visually, so it sits inside the hero's rhythm, not the
+       inter-section one. Kept outside <Section> deliberately. */
+    <section className="bg-page pb-2">
       <div className="container-page">
         <Reveal>
           <div className="divide-line rounded-card border-line bg-card grid divide-y overflow-hidden border shadow-[var(--shadow-soft)] md:grid-cols-3 md:divide-x md:divide-y-0">

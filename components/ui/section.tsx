@@ -2,6 +2,28 @@ import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/ui/reveal";
 
 /**
+ * The one vertical rhythm for the whole site.
+ *
+ * 64px mobile / 80px desktop, so the gap between two adjacent sections is
+ * 128/160px. Deliberately not the 96px desktop value first sketched: at 96 the
+ * boundary gap becomes 192px, and measurement showed the page already had more
+ * air than it needed.
+ *
+ * Every top-level section must go through here. Passing padding via `className`
+ * is what let the rhythm drift before — /guides/[slug] had `pt-0 md:pt-0` applied
+ * mid-page, producing an 80px gap where every other boundary was 160px.
+ */
+const SPACING = {
+  /** The default. Use this unless one of the cases below genuinely applies. */
+  default: "py-16 md:py-20",
+  /**
+   * First section after a PageHero. PageHero already supplies bottom padding,
+   * so a full top pad here would double it.
+   */
+  flushTop: "pb-16 md:pb-20",
+} as const;
+
+/**
  * Section shell. `tone` drives the alternating white / #F8FAFC rhythm — pages
  * should alternate rather than stack two of the same tone, which is what makes
  * the whitespace read as structure instead of emptiness.
@@ -11,17 +33,20 @@ export function Section({
   className,
   id,
   tone = "page",
+  spacing = "default",
 }: {
   children: React.ReactNode;
   className?: string;
   id?: string;
   tone?: "page" | "panel" | "brand";
+  spacing?: keyof typeof SPACING;
 }) {
   return (
     <section
       id={id}
       className={cn(
-        "scroll-mt-24 py-16 md:py-20",
+        "scroll-mt-24",
+        SPACING[spacing],
         tone === "page" && "bg-page",
         tone === "panel" && "bg-panel",
         tone === "brand" && "bg-brand text-on-brand",

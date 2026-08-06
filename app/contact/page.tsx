@@ -34,7 +34,7 @@ export default function ContactPage() {
         breadcrumbs={breadcrumbs}
       />
 
-      <Section className="pt-0 md:pt-0">
+      <Section spacing="flushTop">
         <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
           {/* Form first in the DOM: it is the point of the page, and on mobile
               it should be what you land on rather than the address block. */}
