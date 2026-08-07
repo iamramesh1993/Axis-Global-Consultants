@@ -16,8 +16,8 @@ Nothing else on this list matters as much as these three.
 
 | #   | Item                                   | Owner | Status         | Notes                                                                                                                                                                                                                        |
 | --- | -------------------------------------- | ----- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 0.1 | **Resend API key** — lead email alerts | R     | TODO           | Leads save to the database but **nobody is notified**. The site promises a reply "within one working day". Until this is set, that promise depends on someone remembering to open the dashboard. See §1.1.                   |
-| 0.2 | **Admin password**                     | R     | TODO           | `vercel env add ADMIN_PASSWORD production --sensitive`. `/admin/leads` is locked and unusable until then. Session secret is already set.                                                                                     |
+| 0.1 | **Resend API key** — lead email alerts | R     | DONE           | Leads save to the database but **nobody is notified**. The site promises a reply "within one working day". Until this is set, that promise depends on someone remembering to open the dashboard. See §1.1.                   |
+| 0.2 | **Admin password**                     | R     | DONE           | `vercel env add ADMIN_PASSWORD production --sensitive`. `/admin/leads` is locked and unusable until then. Session secret is already set.                                                                                     |
 | 0.3 | **Flip `SITE_INDEXABLE=true`**         | Dev   | BLOCKED by 0.1 | Site is currently `noindex` + `robots.txt Disallow: /`. Nothing gets found on Google until this flips. Hold until the lead form notifies properly — a student who submits into silence is worse than one who never finds us. |
 
 ---
@@ -135,6 +135,59 @@ frontmatter — the date renders on the page next to the sources.
 | 7.6 | Single source of truth for brand/contact     | Dev     | DONE   | `lib/site.ts`.                                                                                                                                                                                                                                                                                          |
 | 7.7 | Photo licensing recorded                     | Dev     | DONE   | `docs/photo-credits.md` — Unsplash IDs and licence terms.                                                                                                                                                                                                                                               |
 | 7.8 | Student portal (Phase 2)                     | R + Dev | TODO   | Login, live application tracker, document upload. The status card on the home page sets this expectation, so don't leave it indefinitely.                                                                                                                                                               |
+
+---
+
+## Namecheap MX trap — read before touching DNS again
+
+**Adding any MX record in Namecheap's Host Records flips MAIL SETTINGS from
+"Email Forwarding" to "Custom MX", which silently deletes the `@` MX records and
+the root SPF. Email to hello@axisglobalpk.com stops being delivered.**
+
+This happened on 2026-08-07 while adding Resend's records. It is not obvious:
+public resolvers keep serving the old MX from cache for ~20 minutes, so nothing
+looks wrong until it is.
+
+Switching MAIL SETTINGS back to "Email Forwarding" restores the `@` records —
+and deletes Resend's `send` MX and `send` TXT. Namecheap will not hold both
+through that dropdown. To have both you must stay on **Custom MX** and add every
+MX record by hand, including the five below.
+
+### Restore values for `@` (email forwarding)
+
+| Type | Host | Value                                                | Priority |
+| ---- | ---- | ---------------------------------------------------- | -------- |
+| MX   | `@`  | `eforward1.registrar-servers.com`                    | 10       |
+| MX   | `@`  | `eforward2.registrar-servers.com`                    | 10       |
+| MX   | `@`  | `eforward3.registrar-servers.com`                    | 10       |
+| MX   | `@`  | `eforward4.registrar-servers.com`                    | 15       |
+| MX   | `@`  | `eforward5.registrar-servers.com`                    | 20       |
+| TXT  | `@`  | `v=spf1 include:spf.efwd.registrar-servers.com ~all` | —        |
+
+### Current state (2026-08-07)
+
+Present: DKIM (`resend._domainkey`), DMARC (`_dmarc`), the five `@` MX records,
+root SPF, the Vercel A records and the `www` CNAME.
+
+Absent by choice: Resend's `send` MX and `send` TXT. Sending was verified working
+without them — DKIM is what Resend verifies and what carries DMARC alignment.
+The `send` MX only routes bounce/complaint feedback to SES, and Resend still
+surfaces bounces in its dashboard. Business email was judged more important than
+that, having already broken twice.
+
+Reinstate them only if bounce data becomes necessary, and only via Custom MX
+with all five `@` records added manually first.
+
+### Verify after any DNS change
+
+```
+dig +short MX axisglobalpk.com @dns1.registrar-servers.com   # expect 5 eforward
+dig +short TXT axisglobalpk.com @dns1.registrar-servers.com  # expect root SPF
+dig +short TXT resend._domainkey.axisglobalpk.com @dns1.registrar-servers.com
+```
+
+Query the authoritative nameserver, not a public resolver — cache will hide a
+deletion for up to an hour.
 
 ---
 

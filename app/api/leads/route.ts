@@ -118,7 +118,11 @@ export async function POST(request: Request) {
     sendLeadWhatsApp(lead),
   ]);
 
-  if (!email.sent) console.warn("[leads] email not sent:", email.reason);
+  // Log the success as well as the failure. Verifying delivery by the *absence*
+  // of a warning is not verification — it cannot tell a working notification
+  // from a code path that never ran.
+  if (email.sent) console.info("[leads] alert email accepted by Resend");
+  else console.warn("[leads] email not sent:", email.reason);
   if (!whatsapp.sent && whatsapp.reason !== "disabled") {
     console.warn("[leads] whatsapp not sent:", whatsapp.reason);
   }
