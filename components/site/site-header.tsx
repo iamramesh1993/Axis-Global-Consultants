@@ -6,13 +6,8 @@ import { usePathname } from "next/navigation";
 import { ArrowRight, Mail, Menu, Phone, X } from "lucide-react";
 import { Logo } from "@/components/site/logo";
 import { ButtonLink } from "@/components/ui/button";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  TiktokIcon,
-  WhatsappIcon,
-} from "@/components/site/social-icons";
+import { WhatsappIcon } from "@/components/site/social-icons";
+import { SocialLinks } from "@/components/site/social-links";
 import { mainNav, site, whatsappLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -20,13 +15,6 @@ const drawerLegal = [
   { href: "/how-it-works#faqs", label: "FAQs" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
-];
-
-const socials = [
-  { href: site.socials.instagram, label: "Instagram", Icon: InstagramIcon },
-  { href: site.socials.tiktok, label: "TikTok", Icon: TiktokIcon },
-  { href: site.socials.facebook, label: "Facebook", Icon: FacebookIcon },
-  { href: site.socials.linkedin, label: "LinkedIn", Icon: LinkedinIcon },
 ];
 
 export function SiteHeader() {
@@ -207,23 +195,7 @@ export function SiteHeader() {
 
           {/* Socials + legal */}
           <div className="border-line mt-7 flex flex-col gap-5 border-t pt-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
-            <div className="flex items-center gap-2">
-              {socials.map(({ href, label, Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="rounded-control border-line text-brand hover:border-brand hover:bg-brand hover:text-on-brand grid h-10 w-10 place-items-center border transition-colors"
-                >
-                  <Icon
-                    className="h-[1.125rem] w-[1.125rem]"
-                    aria-hidden="true"
-                  />
-                </a>
-              ))}
-            </div>
+            <SocialLinks />
 
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
               {drawerLegal.map((item) => (

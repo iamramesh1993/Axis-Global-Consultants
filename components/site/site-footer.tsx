@@ -1,13 +1,8 @@
 import Link from "next/link";
 import { Mail, Phone } from "lucide-react";
 import { Logo } from "@/components/site/logo";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  TiktokIcon,
-  WhatsappIcon,
-} from "@/components/site/social-icons";
+import { WhatsappIcon } from "@/components/site/social-icons";
+import { SocialLinks } from "@/components/site/social-links";
 import { site, whatsappLink } from "@/lib/site";
 
 const columns = [
@@ -36,13 +31,6 @@ const columns = [
       { href: "/terms", label: "Terms of use" },
     ],
   },
-];
-
-const socials = [
-  { href: site.socials.instagram, label: "Instagram", Icon: InstagramIcon },
-  { href: site.socials.tiktok, label: "TikTok", Icon: TiktokIcon },
-  { href: site.socials.facebook, label: "Facebook", Icon: FacebookIcon },
-  { href: site.socials.linkedin, label: "LinkedIn", Icon: LinkedinIcon },
 ];
 
 export function SiteFooter() {
@@ -136,23 +124,7 @@ export function SiteFooter() {
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-2">
-            {socials.map(({ href, label, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="rounded-control border-line text-brand hover:border-brand hover:bg-brand hover:text-on-brand grid h-10 w-10 place-items-center border transition-colors duration-200"
-              >
-                <Icon
-                  className="h-[1.125rem] w-[1.125rem]"
-                  aria-hidden="true"
-                />
-              </a>
-            ))}
-          </div>
+          <SocialLinks className="sm:items-end sm:text-right" />
         </div>
 
         <p className="text-ink-subtle mt-8 max-w-3xl text-xs leading-relaxed">

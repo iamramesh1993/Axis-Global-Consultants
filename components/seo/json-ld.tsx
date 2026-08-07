@@ -1,4 +1,4 @@
-import { site } from "@/lib/site";
+import { site, liveSocials } from "@/lib/site";
 import type { Faq } from "@/lib/content-schema";
 
 /**
@@ -30,15 +30,13 @@ export function OrganizationJsonLd() {
         areaServed: { "@type": "Country", name: "Pakistan" },
         address: {
           "@type": "PostalAddress",
-          addressLocality: site.contact.address.city,
+          addressLocality: site.contact.address.locality,
+          postalCode: site.contact.address.postalCode,
           addressCountry: "PK",
         },
-        sameAs: [
-          site.socials.instagram,
-          site.socials.facebook,
-          site.socials.linkedin,
-          site.socials.tiktok,
-        ],
+        // Only real profiles. Pointing a search engine at a 404 is worse than
+        // saying nothing about a platform we are not on yet.
+        sameAs: liveSocials.map((s) => s.url),
         knowsAbout: [
           "Study abroad advisory",
           "UK Student visa",

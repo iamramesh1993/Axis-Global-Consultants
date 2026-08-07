@@ -64,6 +64,19 @@ export default defineConfig({
       env: {
         ADMIN_PASSWORD: TEST_ADMIN_PASSWORD,
         ADMIN_SESSION_SECRET: TEST_ADMIN_SECRET,
+        /**
+         * No database in tests, deliberately.
+         *
+         * `next start` loads .env.local, which after `vercel env pull` holds the
+         * *production* DATABASE_URL — so the suite was reading live leads. The
+         * admin count then changed with real traffic, and any test that posted a
+         * valid lead would have written to production. Blanking it makes the
+         * dashboard's "Database not connected" state deterministic and puts real
+         * data out of reach.
+         */
+        DATABASE_URL: "",
+        DATABASE_URL_UNPOOLED: "",
+        POSTGRES_URL: "",
       },
     },
     {
@@ -76,6 +89,9 @@ export default defineConfig({
       env: {
         ADMIN_PASSWORD: "",
         ADMIN_SESSION_SECRET: "",
+        DATABASE_URL: "",
+        DATABASE_URL_UNPOOLED: "",
+        POSTGRES_URL: "",
       },
     },
   ],

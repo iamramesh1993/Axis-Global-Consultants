@@ -132,8 +132,13 @@ test.describe("mobile layout", () => {
       drawer.getByRole("link", { name: /hello@axisglobalpk\.com/i }),
     ).toBeVisible();
 
-    for (const label of ["Instagram", "TikTok", "Facebook", "LinkedIn"]) {
+    // Live accounts are links; the others are present but labelled, not linked.
+    for (const label of ["Instagram", "TikTok", "Facebook"]) {
       await expect(drawer.getByRole("link", { name: label })).toBeVisible();
+    }
+    for (const label of ["LinkedIn"]) {
+      await expect(drawer.getByRole("link", { name: label })).toHaveCount(0);
+      await expect(drawer.getByLabel(`${label} — coming soon`)).toBeVisible();
     }
 
     for (const label of ["FAQs", "Privacy", "Terms"]) {

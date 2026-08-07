@@ -37,21 +37,77 @@ export const site = {
      */
     address: {
       street: "",
-      city: "Karachi",
+      city: "Islamabad / Rawalpindi",
+      /** Used on its own in structured data, which wants a single locality. */
+      locality: "Islamabad",
+      postalCode: "46000",
       country: "Pakistan",
     },
     /** Shown wherever an address would be, so the absence never looks like a gap. */
     meetingNote: "Meetings by appointment, in person or on video",
     hours: "Mon–Sat, 10:00–19:00 PKT",
   },
-
-  socials: {
-    instagram: "https://instagram.com/axisglobalpk", // PLACEHOLDER
-    facebook: "https://facebook.com/axisglobalpk", // PLACEHOLDER
-    linkedin: "https://linkedin.com/company/axisglobalpk", // PLACEHOLDER
-    tiktok: "https://tiktok.com/@axisglobalpk", // PLACEHOLDER
-  },
 } as const;
+
+/**
+ * Social presence.
+ *
+ * `live: false` means the account does not exist yet. Those still render, muted
+ * and clearly labelled, rather than linking somewhere broken — a dead social
+ * icon costs more trust than an absent one, and quietly dropping them would
+ * leave the footer looking lopsided.
+ *
+ * Only live profiles go into the Organization `sameAs` in structured data;
+ * pointing search engines at a 404 is worse than saying nothing.
+ */
+export const socials = [
+  {
+    key: "instagram",
+    label: "Instagram",
+    url: "https://instagram.com/axisglobalpk.agp01",
+    live: true,
+  },
+  {
+    key: "facebook",
+    label: "Facebook",
+    url: "https://facebook.com/profile.php?id=61592853936675",
+    live: true,
+  },
+  {
+    key: "tiktok",
+    label: "TikTok",
+    url: "https://www.tiktok.com/@axisglobalpk",
+    live: true,
+  },
+  {
+    key: "linkedin",
+    label: "LinkedIn",
+    url: null,
+    live: false,
+  },
+] as const;
+
+export const liveSocials = socials.filter((s) => s.live);
+export const pendingSocials = socials.filter((s) => !s.live);
+
+/**
+ * The note beside the social row, derived from the data rather than written out.
+ *
+ * Hardcoding it meant the copy went stale the moment an account went live — it
+ * still named only Instagram and Facebook after TikTok launched. Now adding a
+ * profile above is the only edit needed.
+ */
+export function socialNote(): string | null {
+  if (pendingSocials.length === 0) return null;
+
+  const names = (list: readonly { label: string }[]) => {
+    const labels = list.map((s) => s.label);
+    if (labels.length === 1) return labels[0]!;
+    return `${labels.slice(0, -1).join(", ")} and ${labels.at(-1)}`;
+  };
+
+  return `Not on ${names(pendingSocials)} yet — find us on ${names(liveSocials)}.`;
+}
 
 export const whatsappLink = `https://wa.me/${site.contact.whatsapp.replace(/\D/g, "")}`;
 
